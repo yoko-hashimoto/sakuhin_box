@@ -4,5 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
+  # 1人のユーザーは複数のクリエイターを保有している
   has_many :creators
+  #親子関係にある関連モデルcreators（子）を作成する。
+  accepts_nested_attributes_for :creators
 end
