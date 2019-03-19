@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :creators
   resources :artworks
 
+  resources :users, :only => [:update, :show, :edit, :destroy]
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

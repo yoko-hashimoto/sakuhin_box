@@ -1,3 +1,11 @@
 // Place all the styles related to the creators controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.creator-detail {
+  .image {
+    width: 50px;
+    img {
+      width: 100%;
+    }
+  }
+}

@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   
   # 1人のユーザーは複数のクリエイターを保有している
-  has_many :creators
+  has_many :creators, dependent: :destroy
   #親子関係にある関連モデルcreators（子）を作成する。
   accepts_nested_attributes_for :creators
+
+  validates :username, presence: true
 end

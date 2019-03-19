@@ -1,0 +1,13 @@
+<h1>作品投稿画面</h1>
+
+<%= form_with(model: @artwork, local: true) do |form| %>
+  <div>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+  <div>
+    <%= form.label :caption %>
+    <%= form.text_field :caption %>
+  </div>
+  <%= form.submit %>
+<% end %>
