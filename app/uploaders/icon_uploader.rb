@@ -17,6 +17,7 @@ class IconUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  # アイコンが設定されていないときはデフォルト画像を表示させる
   def default_url
     "default.png"
   end

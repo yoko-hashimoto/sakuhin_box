@@ -11,7 +11,7 @@ class CreatorsController < ApplicationController
   end
 
   def create
-    #ログイン中のuserのcreatorをbuildする
+    #ログイン中のuserのcreatorをbuild(new)する
     @creator = current_user.creators.build(creator_params)
 
     if @creator.save
