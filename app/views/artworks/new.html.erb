@@ -1,13 +1,42 @@
 <h1>作品投稿画面</h1>
 
 <%= form_with(model: @artwork, local: true) do |form| %>
+
+  <% if @artwork.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @artwork.errors.count %>件のエラーがあります。</h2>
+      <ul>
+      <% @artwork.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div>
-    <%= form.label :image %>
+    <!-- 確認画面から新規作成画面に戻った時等に、 -->
+    <!-- アップロードした画像を表示させるための記述 -->
+    <p><%= image_tag(@artwork.image.url) if @artwork.image.url %></p>
     <%= form.file_field :image %>
   </div>
   <div>
-    <%= form.label :caption %>
-    <%= form.text_field :caption %>
+    <%= form.text_area :caption, placeholder: 'ひとこと' %>
+  </div>
+
+  <div>
+    <%= form.label :name, 'クリエイター' %>
+    <%# ユーザーに紐付いているクリエイターをプルダウン表示する %>
+    <%= form.collection_select :creator_id, current_user.creators.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.label :created_date, '作った時期' %>
+    <%= form.date_select :created_date,  discard_day: true %>
+  </div>
+  <div>
+    <%# 作品の公開設定をbooliean型のカラム、is_published で設定する %>
+    <label><%= form.radio_button :is_published, true %>公開する</label>
+    <label><%= form.radio_button :is_published, false, :checked => true %>公開しない</label>
   </div>
   <%= form.submit %>
 <% end %>

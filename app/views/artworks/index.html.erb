@@ -1,1 +1,9 @@
-<h1>index<h1>
+<h1>作品一覧<h1>
+
+<div>
+  <% @artworks.each do |artwork| %>
+    <p><%= image_tag artwork.image.url %></p>
+    <p><%= artwork.creator.name %></p>
+  <% end %>
+</div>
+
