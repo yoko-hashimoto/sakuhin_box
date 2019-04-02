@@ -41,7 +41,7 @@ class ArtworksController < ApplicationController
   private
 
   def artwork_params
-    params.require(:artwork).permit(:image, :image_cache, :caption, :creator_id, :created_date, :is_published)
+    params.require(:artwork).permit(:image, :image_cache, :caption, :creator_id, :created_date, :is_published, :folder_list)
   end
 
   def set_artwork

@@ -1,9 +1,12 @@
-<h1>作品一覧<h1>
+<h2>作品一覧<h2>
 
 <div>
   <% @artworks.each do |artwork| %>
     <p><%= image_tag artwork.image.url %></p>
     <p><%= artwork.creator.name %></p>
+    <%# renderを利用してパーシャルファイルで処理する %>
+    <%# tag_listにtask.tag_listで取り出したタグをパラメータとして渡す %>
+    <p><%= render 'artworks/tag_list', tag_list: artwork.folder_list %></p>
   <% end %>
 </div>
 

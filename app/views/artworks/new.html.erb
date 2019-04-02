@@ -1,4 +1,4 @@
-<h1>作品投稿画面</h1>
+<h2>作品投稿画面</h2>
 
 <%= form_with(model: @artwork, local: true) do |form| %>
 
@@ -34,9 +34,20 @@
     <%= form.date_select :created_date,  discard_day: true %>
   </div>
   <div>
-    <%# 作品の公開設定をbooliean型のカラム、is_published で設定する %>
+    <%# 作品の公開設定をbooliean型の、is_publishedカラムで設定する %>
+    <%# :checked => true によってデフォルトでチェックを付けた状態にする %>
     <label><%= form.radio_button :is_published, true %>公開する</label>
     <label><%= form.radio_button :is_published, false, :checked => true %>公開しない</label>
   </div>
-  <%= form.submit %>
+  <div>
+   <%# タグ入力フォームを追加 %>
+   <%= form.label :folder_list, "フォルダ名" %>
+   <%= form.text_field :folder_list, value: @artwork.folder_list.join(','), "data-role" => "tagsinput" %>
+  </div>
+  <div>
+    <%= form.submit %>
+    <!--<input type="submit" value="登録" />-->
+    <!--<input type="button" onclick="submit();" value="送信" />-->
+    <%#= form.submit, type: 'button', onclick: 'submit();' %>
+  </div>
 <% end %>
