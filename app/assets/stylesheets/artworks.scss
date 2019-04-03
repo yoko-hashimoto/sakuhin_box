@@ -1,3 +1,29 @@
 // Place all the styles related to the artworks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h2 {
+  text-align: center;
+  font-weight:bold;
+  margin-bottom: 40px;
+}
+
+.artwork-index {
+  .image {
+    width: auto;
+    text-align: center
+  }
+  .image {
+    img {
+      max-width: 100%;
+      height: 250px;
+    }
+  }
+  .creator-name {
+    color: #000;
+  }
+  .date {
+    color: #000;
+    font-size: 60%;
+  }
+}

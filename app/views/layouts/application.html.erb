@@ -5,18 +5,21 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="normalize.css">
     <meta name="viewport" content="width=device-width">
     
-    <%# Bootstrapを適用させる(CSS) %>
+    <%# BootstrapをCDNで適用させる(CSS) %>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
-    <%# Bootstrapを適用させる(JS) %>
+    <%# BootstrapをCDNで適用させる(JS) %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    <%# FontAwesomeを適用させる %>
+    <%# FontAwesomeをCDNで適用させる %>
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
