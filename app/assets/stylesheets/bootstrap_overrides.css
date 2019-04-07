@@ -1,0 +1,7 @@
+.bootstrap-tagsinput {
+  width: 350px;
+}
+
+.bootstrap-tagsinput input {
+  min-width: 100px;
+}

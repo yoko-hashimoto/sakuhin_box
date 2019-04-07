@@ -8,13 +8,16 @@
     <%= @creator.name %>
   </p>
   <p>
-    <span><%= link_to edit_creator_path(@creator.id) do %></span>
+    <%# @creator は @creator.id のこと%>
+    <span><%= link_to edit_creator_path(@creator) do %></span>
       <i class="fas fa-palette fa-lg" ></i>
       <span>クリエイター情報を編集する</span>
     <% end %>
   </p>
   <p>
-    <span><%= link_to "#" do %></span>
+    <%# @creator は @creator.id のこと%>
+    <%# creator_artworks_path(@creator) によって id 付きで artworks#index が呼ばれる %>
+    <span><%= link_to creator_artworks_path(@creator) do %></span>
       <i class="far fa-images fa-lg"></i>
       <span>自分の作品を見る</span>
     <% end %>

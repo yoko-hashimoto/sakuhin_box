@@ -1,14 +1,10 @@
-// Place all the styles related to the artworks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.artworks-index,.creator-artworks-index {
+  h3 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
 
-h2 {
-  text-align: center;
-  font-weight:bold;
-  margin-bottom: 40px;
-}
-
-.artwork-index {
   .image {
     width: auto;
     text-align: center
@@ -16,14 +12,58 @@ h2 {
   .image {
     img {
       max-width: 100%;
-      height: 250px;
+      height: 220px;
+      margin-top: 10px;
     }
   }
+
   .creator-name {
     color: #000;
+    font-size: 180%;
+    font-weight:bold;
+    text-align: center;
   }
   .date {
     color: #000;
-    font-size: 60%;
+    // font-size: 60%;
+    font-weight:bold;
+    text-align: center;
+  }
+  .folder-list {
+    h4 {
+      font-weight: bold;
+    }
+    .folder-list {
+      font-size: 120%;
+    } 
+    .folder-name {
+      font-size: 120%;
+    }
+  }
+}
+
+.creator-artworks-index {
+  @media (max-width: 767px) {
+    .folder-dropdown {
+        display: block!important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .folder-dropdown {
+        display: none!important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .folder-list {
+        display: none!important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .folder-list {
+        display: block!important;
+    }
   }
 }
