@@ -43,12 +43,20 @@
           <%# artworkに紐付いたfolder_listを配列のfolder_listsに１つずつ追加していく %>
           <% folder_lists << artwork.folder_list %>
           <% end %>
-          <%# 重複しているフォルダ名を取り除く%>
+          <%# 重複しているフォルダ名を取り除く %>
           <% folders = folder_lists.uniq %>
 
           <%# フォルダ名を１つずつ表示させる%>
           <% folders.each do |folder| %>
+
+
+
+          <%# tag_nameにfolderのタグ名をパラメータとして渡す%>
+          <%= link_to creator_artwork_folders_path(tag_name: folder) do %>
           <p class = "folder-name"><i class="far fa-folder"></i> <%= folder %></p>
+          <% end %>
+
+
           <% end %>
 
           <!--<p><%= link_to "フォルダを追加する" %></p> -->

@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
   resources :creators do
     # クリエイターの詳細画面から、そのクリエイターに紐付いた作品一覧画面に遷移する為、入れ子でルーティングを設定
-    resources :artworks
+    resources :artworks do
+      # クリエイターに紐付いた作品一覧画面から、フォルダ分けしたページに遷移する為のルーティング
+      resources :folders
+    end
   end
 
   resources :artworks

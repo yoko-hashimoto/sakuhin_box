@@ -11,6 +11,13 @@ class ArtworksController < ApplicationController
       @artworks = Artwork.where(creator_id: params[:creator_id]).order(updated_at: "DESC")
       # クリエイターに紐付く作品一覧画面を表示させる
       render :creator_index
+
+
+    elsif params[:tag_name]
+      @artworks = @artworks.tagged_with("#{params[:tag_name]}")
+      render :folder_index
+
+
     else
       # Artwork.published で artworkモデルで定義したスコープ published を呼びだす
       @artworks = Artwork.published.order(updated_at: "DESC")
