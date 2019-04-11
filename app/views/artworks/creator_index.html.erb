@@ -14,10 +14,14 @@
             </a>
             <ul class="dropdown-menu" role="menu">
 
+
+              
+              <!--
+              <%# 新しく空の配列を作る %>
               <% folder_lists = [] %>
               <% @artworks.each do |artwork| %>
               <%# artworkに紐付いたfolder_listを配列のfolder_listsに１つずつ追加していく %>
-              <% folder_lists << artwork.folder_list %>
+              
               <% end %>
               <%# 重複しているフォルダ名を取り除く%>
               <% folders = folder_lists.uniq %>
@@ -25,7 +29,9 @@
               <%# フォルダ名を１つずつ表示させる%>
               <% folders.each do |folder| %>
               <li><a href="#"><i class="far fa-folder"></i> <%= folder %></a></li>
-              <% end %>
+              <% end %>-->
+
+              
             </ul>
           </div>
         </div>
@@ -35,13 +41,15 @@
           <h4><span class ="folder-top"><i class="far fa-folder-open"></i> フォルダ</span></h4>
 
           <!--<% @artworks.each do |artwork| %>
-          <p><%= artwork.folder_list %></p>
+         
           <% end%> -->
 
+
+          <!--
           <% folder_lists = [] %>
           <% @artworks.each do |artwork| %>
           <%# artworkに紐付いたfolder_listを配列のfolder_listsに１つずつ追加していく %>
-          <% folder_lists << artwork.folder_list %>
+          
           <% end %>
           <%# 重複しているフォルダ名を取り除く %>
           <% folders = folder_lists.uniq %>
@@ -52,12 +60,12 @@
 
 
           <%# tag_nameにfolderのタグ名をパラメータとして渡す%>
-          <%= link_to creator_artwork_folders_path(tag_name: folder) do %>
+          <%= link_to "#" do %>
           <p class = "folder-name"><i class="far fa-folder"></i> <%= folder %></p>
           <% end %>
 
 
-          <% end %>
+          <% end %> -->
 
           <!--<p><%= link_to "フォルダを追加する" %></p> -->
         </div>
@@ -85,8 +93,8 @@
 
 
                   <div class = "form-group">
-                    <label for="artwork_folder_list" class = "control-label">フォルダ名</label>
-                    <input value="" data-role="tagsinput" type="text" name="artwork[folder_list]" id="artwork_folder_list" class = "form-control" />
+                    <label class = "control-label">フォルダ名</label>
+                    <input value="" type="text" class = "form-control" />
                   </div>
 
                   <!--<div>

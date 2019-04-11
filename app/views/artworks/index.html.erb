@@ -18,11 +18,6 @@
             <p class = "date">
               <%= artwork.created_at.strftime("%Y-%m-%d %H:%M ") %>
             </p>
-            <%# renderを利用してパーシャルファイルで処理する %>
-            <%# tag_listにtask.tag_listで取り出したタグをパラメータとして渡す %>
-            <!--<p>
-              <%= render 'artworks/tag_list', tag_list: artwork.folder_list %>
-            </p> -->
           <% end %>
           </div>
         </div>

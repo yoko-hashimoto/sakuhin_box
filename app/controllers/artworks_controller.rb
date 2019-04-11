@@ -12,12 +12,6 @@ class ArtworksController < ApplicationController
       # クリエイターに紐付く作品一覧画面を表示させる
       render :creator_index
 
-
-    elsif params[:tag_name]
-      @artworks = @artworks.tagged_with("#{params[:tag_name]}")
-      render :folder_index
-
-
     else
       # Artwork.published で artworkモデルで定義したスコープ published を呼びだす
       @artworks = Artwork.published.order(updated_at: "DESC")
@@ -57,7 +51,7 @@ class ArtworksController < ApplicationController
   private
 
   def artwork_params
-    params.require(:artwork).permit(:image, :image_cache, :caption, :creator_id, :created_date, :is_published, :folder_list)
+    params.require(:artwork).permit(:image, :image_cache, :caption, :creator_id, :created_date, :is_published, :folder_id)
   end
 
   def set_artwork
