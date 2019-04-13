@@ -41,7 +41,25 @@
   </div>
   <div>
    <%# タグ入力フォームを追加 %>
-   <%= form.label :folder_list, "フォルダ名" %>
+   <%#= form.label :folder_name, "フォルダ名" %>
+
+
+
+
+
+
+  <%#= fom.fields_for :folder do |al| %><!-- ここから子レコードcreatorに入力する内容 -->
+  <!--以下１：子モデルfolderへ入力する内容 -->
+  <!--artworkモデルに送るform_forとは別にfolderに送るフォームを作成。 -->
+  <%= form.fields_for :folder do |folder| %>
+    <div class="field">
+      <%= folder.label :folder_name, "フォルダ名" %>
+      <%= folder.text_field :folder_name %>
+    </div>
+  <% end %>
+
+
+
    
   </div>
   <div>

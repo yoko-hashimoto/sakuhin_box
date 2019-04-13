@@ -4,6 +4,7 @@ class Creator < ApplicationRecord
   belongs_to :user, optional: true
   # クリエイターは複数の作品を保有している
   has_many :artworks
+  has_many :folders
 
   validates :name, presence: true
 

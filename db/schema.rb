@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_205635) do
+ActiveRecord::Schema.define(version: 2019_04_12_045221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 2019_03_12_205635) do
     t.bigint "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "folder_id"
     t.index ["creator_id"], name: "index_artworks_on_creator_id"
+    t.index ["folder_id"], name: "index_artworks_on_folder_id"
   end
 
   create_table "creators", force: :cascade do |t|
@@ -33,6 +35,14 @@ ActiveRecord::Schema.define(version: 2019_03_12_205635) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_creators_on_user_id"
+  end
+
+  create_table "folders", force: :cascade do |t|
+    t.string "folder_name"
+    t.bigint "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_folders_on_creator_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,5 +69,7 @@ ActiveRecord::Schema.define(version: 2019_03_12_205635) do
   end
 
   add_foreign_key "artworks", "creators"
+  add_foreign_key "artworks", "folders"
   add_foreign_key "creators", "users"
+  add_foreign_key "folders", "creators"
 end

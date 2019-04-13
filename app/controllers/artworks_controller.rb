@@ -23,11 +23,14 @@ class ArtworksController < ApplicationController
       @artwork = Artwork.new(artwork_params)
     else
       @artwork = Artwork.new
+      # 同時にFolderもbildする（Folder.new と同じ）
+      @artwork.build_folder
     end
   end
 
   def create
     @artwork = Artwork.new(artwork_params)
+    
       if @artwork.save
         redirect_to artworks_path, notice: "作品を投稿しました！"
       else
@@ -51,7 +54,7 @@ class ArtworksController < ApplicationController
   private
 
   def artwork_params
-    params.require(:artwork).permit(:image, :image_cache, :caption, :creator_id, :created_date, :is_published, :folder_id)
+    params.require(:artwork).permit(:image, :image_cache, :caption, :creator_id, :created_date, :is_published, folder_attributes: [:folder_name])
   end
 
   def set_artwork
