@@ -1,1 +1,49 @@
-<h2>作品詳細画面</h2>
+<!--<h2>作品詳細画面</h2>-->
+
+<div class = "artwork-detail">
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-xs-12 col-sm-12 col-md-offset-2 col-md-8">
+        <div class = "artwork">
+          <p class = "image">
+            <!-- img-responsive によって画像をレスポンシブに対応、center-block によりセンター寄せに設定 -->
+            <%= image_tag @artwork.image.url, :class => "img-responsive center-block" %>
+          </p>
+          <p class = "creator-name">
+            <%= @artwork.creator.name %>
+          </p>
+          <p class = "caption">
+            <%= @artwork.caption %>
+          </p>
+          <p class = "created-date">
+            <span>作った時期 < <%= @artwork.created_date %>></span>
+          </p>
+          <p class = "date">
+            <%= @artwork.created_at.strftime("%Y-%m-%d %H:%M ") %>
+          </p>
+
+          <div>
+            <!-- artwork を投稿した user のidと current_user (ログイン中のuserのid)が同じ場合 -->
+            <% if @artwork.creator.user_id == current_user.id %>
+              <div class="buttons">
+                <div class="delete_button">
+                  <%# 削除ボタンの表示 %>
+                  <%= link_to artwork_path(@artwork.id), method: :delete, data: { confirm: '本当に削除していいですか？' } do %>
+                    <i class="far fa-trash-alt fa-lg"></i>
+                  <% end %>
+                </div>
+                <div class="edit_button">
+                  <%# 編集ボタンの表示 %>
+                  <%= link_to edit_artwork_path(@artwork.id), data: { confirm: '本当に編集していいですか？' } do %>
+                    <i class="far fa-edit fa-lg"></i>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

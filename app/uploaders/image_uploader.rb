@@ -10,7 +10,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # storage :fog
 
   # 画像サイズの調整
-  process :resize_to_limit => [350, 350]
+  process :resize_to_limit => [700, 700]
 
   # 画像ファイルの保存先の設定
   def store_dir

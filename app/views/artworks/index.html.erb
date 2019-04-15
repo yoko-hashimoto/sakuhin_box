@@ -10,7 +10,8 @@
           <div class = "artwork">
           <%= link_to artwork do%>
             <p class = "image">
-              <%= image_tag artwork.image.url %>
+              <!-- img-responsive によって画像をレスポンシブに対応、center-block によりセンター寄せに設定 -->
+              <%= image_tag artwork.image.url, :class => "img-responsive center-block" %>
             </p>
             <p class = "creator-name">
               <%= artwork.creator.name %>
