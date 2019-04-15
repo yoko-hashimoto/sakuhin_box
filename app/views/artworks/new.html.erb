@@ -40,27 +40,32 @@
     <label><%= form.radio_button :is_published, false, :checked => true %>公開しない</label>
   </div>
   <div>
+
    <%# タグ入力フォームを追加 %>
    <%#= form.label :folder_name, "フォルダ名" %>
 
 
+  <%#= fom.fields_for :folder do |folder| %><!-- ここから子レコードcreatorに入力する内容 -->
+    <!--以下１：子モデルfolderへ入力する内容 -->
+    <!--artworkモデルに送るform_forとは別にfolderに送るフォームを作成。 -->
+    <%= form.fields_for :folder do |folder| %>
+      <div>
+        <%= folder.label :folder_name, "フォルダ名" %>
+        <%= folder.text_field :folder_name %>
+      </div>
+    <% end %>
 
 
+      
+      <div>
+        <%= form.label :folder_name, 'フォルダ名選択' %>
+        <%# クリエイターに紐付いているフォルダ名をプルダウン表示する %>
+        <%= form.collection_select :folder_id, Folder.all, :id, :folder_name %>
+      </div>
+
+  
 
 
-  <%#= fom.fields_for :folder do |al| %><!-- ここから子レコードcreatorに入力する内容 -->
-  <!--以下１：子モデルfolderへ入力する内容 -->
-  <!--artworkモデルに送るform_forとは別にfolderに送るフォームを作成。 -->
-  <%= form.fields_for :folder do |folder| %>
-    <div class="field">
-      <%= folder.label :folder_name, "フォルダ名" %>
-      <%= folder.text_field :folder_name %>
-    </div>
-  <% end %>
-
-
-
-   
   </div>
   <div>
     <%= form.submit %>
