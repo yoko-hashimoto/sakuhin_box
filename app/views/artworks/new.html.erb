@@ -56,14 +56,20 @@
     <% end %>
 
 
-      
+      <!--
       <div>
         <%= form.label :folder_name, 'フォルダ名選択' %>
         <%# クリエイターに紐付いているフォルダ名をプルダウン表示する %>
         <%= form.collection_select :folder_id, Folder.all, :id, :folder_name %>
       </div>
+      -->
 
-  
+      <div class="field">
+        <%= form.label :folder %>
+        <%= select_tag :folder_id, options_from_collection_for_select(Folder.where(creator_id: current_user.id), :id, :folder_name, params[:folder_id]) %>
+      </div>
+
+  <%= link_to 'folder新規作成', new_folder_path %>
 
 
   </div>

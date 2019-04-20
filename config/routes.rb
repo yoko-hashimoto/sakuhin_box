@@ -6,17 +6,17 @@ Rails.application.routes.draw do
 
   resources :creators do
     # クリエイターの詳細画面から、そのクリエイターに紐付いた作品一覧画面に遷移する為、入れ子でルーティングを設定
-    resources :artworks do
-      # クリエイターに紐付いた作品一覧画面から、フォルダ分けしたページに遷移する為のルーティング
-      resources :folders
-    end
+    resources :artworks, :only => [:index]
   end
 
   resources :artworks
 
   resources :users, :only => [:update, :show, :edit, :destroy]
 
-  resources :folders
+  resources :folders do 
+    # folderに紐付いたartworkのみ表示させる為、入れ子でルーティングを設定
+    resources :artworks, :only => [:index]
+  end
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

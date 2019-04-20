@@ -1,7 +1,9 @@
 <div class = "creator-artworks-index">  
   <div class="container">
 
-    <h3>全ての作品 </h3>
+    <!--<h3> 全ての作品 </h3>-->
+    <h3><%= @creator.name %> の作品</h3>
+
 
     <div class = "row">
       <div class="col-sm-12 col-md-2">
@@ -14,7 +16,15 @@
             </a>
             <ul class="dropdown-menu" role="menu">
 
+              <h4><span class ="folder-top"><i class="far fa-folder-open"></i> フォルダ</span></h4>
 
+            <!-- フォルダ名を一つずつ表示-->
+            <% @folders.each do |folder| %>
+              <!-- folder_artworks_path(folder.id) によって folder の id 付きで artworks#index が呼ばれる -->
+              <%= link_to folder_artworks_path(folder.id) do %>
+                <p class = "folder-name"><i class="far fa-folder"></i> <%= folder.folder_name %></p>
+              <% end%>
+            <% end%>
               
               <!--
               <%# 新しく空の配列を作る %>
@@ -40,6 +50,13 @@
         <div Class = "folder-list">
           <h4><span class ="folder-top"><i class="far fa-folder-open"></i> フォルダ</span></h4>
 
+            <!-- フォルダ名を一つずつ表示-->
+            <% @folders.each do |folder| %>
+              <%= link_to folder_artworks_path(folder.id) do %>
+                <p class = "folder-name"><i class="far fa-folder"></i> <%= folder.folder_name %></p>
+              <% end%>
+            <% end%>
+            
           <!--<% @artworks.each do |artwork| %>
          
           <% end%> -->
@@ -69,6 +86,7 @@
 
           <!--<p><%= link_to "フォルダを追加する" %></p> -->
         </div>
+
 
         <br>
         <!-- モーダル表示用のボタン -->

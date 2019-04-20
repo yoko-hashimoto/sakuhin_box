@@ -1,0 +1,25 @@
+<%= form_with(model: folder, local: true) do |form| %>
+  <% if folder.errors.any? %>
+    <div id="error_explanation">
+      <!--<h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>-->
+      <h2><%= folder.errors.count %> 件のエラーがあります。</h2>
+
+      <ul>
+      <% folder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.fields_for :folders do |artwork| %>
+      <%= form.label :folder_name %>
+      <%= form.text_field :folder_name %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
