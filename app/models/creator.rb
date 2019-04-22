@@ -5,7 +5,7 @@ class Creator < ApplicationRecord
   
   # クリエイターは複数の作品を保有している
   has_many :artworks
-  has_many :folders
+  has_many :folders, ->{ order(:id) }
 
   validates :name, presence: true
 

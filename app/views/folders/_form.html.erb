@@ -16,6 +16,8 @@
     <%= form.fields_for :folders do |artwork| %>
       <%= form.label :folder_name %>
       <%= form.text_field :folder_name %>
+      
+      <%#= form.hidden_field :creator_id , :value => "artwork.creator_id" %>
     <% end %>
   </div>
 

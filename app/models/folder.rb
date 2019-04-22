@@ -1,5 +1,6 @@
 class Folder < ApplicationRecord
-  belongs_to :creator
+  # optional: true を付けることで、バリデーションエラーを回避
+  belongs_to :creator, optional: true
   has_many :artworks
 
   #親子関係にある関連モデル artworks を作成する

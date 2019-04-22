@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :creators do
     # クリエイターの詳細画面から、そのクリエイターに紐付いた作品一覧画面に遷移する為、入れ子でルーティングを設定
     resources :artworks, :only => [:index]
+    # Ajaxで呼ばれてフォルダの一覧を返すアクション
+    resources :folders, only: :index
   end
 
   resources :artworks

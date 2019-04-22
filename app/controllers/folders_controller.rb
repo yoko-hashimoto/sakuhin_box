@@ -2,7 +2,11 @@ class FoldersController < ApplicationController
   before_action :set_folder, only: [:show, :edit, :update, :destroy]
 
   def index
-    @folders = Folder.all
+    # @folders = Folder.all
+
+    creator = Creator.find(params[:ceator_id])
+    render json: creator.folders.select(:id, :folder_name)
+
   end
 
   def show
@@ -23,12 +27,12 @@ class FoldersController < ApplicationController
   def create
     @folder = Folder.new(folder_params)
 
-    # @folder.creator_id = params[:creator_id]
+    @folder.creator_id = params[:creator_id]
 
-    @folder.creator_id = current_user.id
+    # @folder.creator_id = current_user.id
 
     if @folder.save
-      redirect_to new_artworks_path, notice: "作品を追加しました！"
+      redirect_to new_artwork_path, notice: "フォルダを追加しました！"
     else
       render 'new'
     end

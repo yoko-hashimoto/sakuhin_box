@@ -23,11 +23,11 @@
     <%= form.text_area :caption, placeholder: 'ひとこと' %>
   </div>
 
-  <div>
+  <!--<div>
     <%= form.label :name, 'クリエイター' %>
     <%# ユーザーに紐付いているクリエイターをプルダウン表示する %>
     <%= form.collection_select :creator_id, current_user.creators.all, :id, :name %>
-  </div>
+  </div>-->
 
   <div>
     <%= form.label :created_date, '作った時期' %>
@@ -48,13 +48,24 @@
   <%#= fom.fields_for :folder do |folder| %><!-- ここから子レコードcreatorに入力する内容 -->
     <!--以下１：子モデルfolderへ入力する内容 -->
     <!--artworkモデルに送るform_forとは別にfolderに送るフォームを作成。 -->
-    <%= form.fields_for :folder do |folder| %>
+    <!--<%= form.fields_for :folder do |folder| %>
       <div>
         <%= folder.label :folder_name, "フォルダ名" %>
         <%= folder.text_field :folder_name %>
       </div>
-    <% end %>
+    <% end %>-->
 
+      <div>
+        <% creator_options = current_user.creators.order(:id).map { |c| [c.name, c.id, data: { children_path: creator_folders_path(c) }] } %>
+        <%= form.label :name, 'クリエイター' %>
+        <%= form.select :creator_id, creator_options, { include_blank: true }, class: 'select-parent' %>
+      </div>
+      <div>
+        <%= form.label :folder_name, 'フォルダ' %>
+        <% folders = @artwork.creator.try(:folders) || [] %>
+        <% folder_options = folders.map { |c| [c.folder_name, c.id] } %>
+        <%= form.select :folder_id, folder_options, { include_blank: true }, class: 'select-children' %>
+      </div>
 
       <!--
       <div>
@@ -66,7 +77,7 @@
 
       <div class="field">
         <%= form.label :folder %>
-        <%= select_tag :folder_id, options_from_collection_for_select(Folder.where(creator_id: current_user.id), :id, :folder_name, params[:folder_id]) %>
+        <%= select_tag :folder_id, options_from_collection_for_select(Folder.where(creator_id: @creator_id), :id, :folder_name, params[:folder_id]) %>
       </div>
 
   <%= link_to 'folder新規作成', new_folder_path %>
@@ -75,8 +86,5 @@
   </div>
   <div>
     <%= form.submit %>
-    <!--<input type="submit" value="登録" />-->
-    <!--<input type="button" onclick="submit();" value="送信" />-->
-    <%#= form.submit, type: 'button', onclick: 'submit();' %>
   </div>
 <% end %>
