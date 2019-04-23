@@ -4,7 +4,7 @@ class FoldersController < ApplicationController
   def index
     # @folders = Folder.all
 
-    creator = Creator.find(params[:ceator_id])
+    creator = Creator.find(params[:creator_id])
     render json: creator.folders.select(:id, :folder_name)
 
   end

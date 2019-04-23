@@ -7,7 +7,7 @@ $ ->
     replaceSelectOptions = ($select, results) ->
       $select.html $('<option>')
       $.each results, ->
-        option = $('<option>').val(this.id).text(this.folder_name)
+        option = $('<option>').val(this.id).text(this.name)
         $select.append(option)
 
      replaceChildrenOptions = ->
