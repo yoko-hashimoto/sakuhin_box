@@ -1,90 +1,13 @@
-<h2>作品投稿画面</h2>
+<div class = "new-artwork">
 
-<%= form_with(model: @artwork, local: true) do |form| %>
+  <div class="container">
+    <h3>作品投稿</h3>
 
-  <% if @artwork.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= @artwork.errors.count %>件のエラーがあります。</h2>
-      <ul>
-      <% @artwork.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <%= render 'form', artwork: @artwork %>
+
+    <div class = "back-button">
+      <%= link_to 'Back', artworks_path %>
     </div>
-  <% end %>
-
-  <div>
-    <!-- 確認画面から新規作成画面に戻った時等に、 -->
-    <!-- アップロードした画像を表示させるための記述 -->
-    <p><%= image_tag(@artwork.image.url) if @artwork.image.url %></p>
-    <%= form.file_field :image %>
+    
   </div>
-  <div>
-    <%= form.text_area :caption, placeholder: 'ひとこと' %>
-  </div>
-
-  <!--<div>
-    <%= form.label :name, 'クリエイター' %>
-    <%# ユーザーに紐付いているクリエイターをプルダウン表示する %>
-    <%= form.collection_select :creator_id, current_user.creators.all, :id, :name %>
-  </div>-->
-
-  <div>
-    <%= form.label :created_date, '作った時期' %>
-    <%= form.date_select :created_date,  discard_day: true %>
-  </div>
-  <div>
-    <%# 作品の公開設定をbooliean型の、is_publishedカラムで設定する %>
-    <%# :checked => true によってデフォルトでチェックを付けた状態にする %>
-    <label><%= form.radio_button :is_published, true %>公開する</label>
-    <label><%= form.radio_button :is_published, false, :checked => true %>公開しない</label>
-  </div>
-  <div>
-
-   <%# タグ入力フォームを追加 %>
-   <%#= form.label :folder_name, "フォルダ名" %>
-
-
-  <%#= fom.fields_for :folder do |folder| %><!-- ここから子レコードcreatorに入力する内容 -->
-    <!--以下１：子モデルfolderへ入力する内容 -->
-    <!--artworkモデルに送るform_forとは別にfolderに送るフォームを作成。 -->
-    <!--<%= form.fields_for :folder do |folder| %>
-      <div>
-        <%= folder.label :folder_name, "フォルダ名" %>
-        <%= folder.text_field :folder_name %>
-      </div>
-    <% end %>-->
-
-      <div>
-        <% creator_options = current_user.creators.order(:id).map { |c| [c.name, c.id, data: { children_path: creator_folders_path(c) }] } %>
-        <%= form.label :name, 'クリエイター' %>
-        <%= form.select :creator_id, creator_options, { include_blank: true }, class: 'select-parent' %>
-      </div>
-      <div>
-        <%= form.label :folder_name, 'フォルダ' %>
-        <% folders = @artwork.creator.try(:folders) || [] %>
-        <% folder_options = folders.map { |c| [c.folder_name, c.id] } %>
-        <%= form.select :folder_id, folder_options, { include_blank: true }, class: 'select-children' %>
-      </div>
-
-      <!--
-      <div>
-        <%= form.label :folder_name, 'フォルダ名選択' %>
-        <%# クリエイターに紐付いているフォルダ名をプルダウン表示する %>
-        <%= form.collection_select :folder_id, Folder.all, :id, :folder_name %>
-      </div>
-      -->
-
-      <div class="field">
-        <%= form.label :folder %>
-        <%= select_tag :folder_id, options_from_collection_for_select(Folder.where(creator_id: @creator_id), :id, :folder_name, params[:folder_id]) %>
-      </div>
-
-  <%= link_to 'folder新規作成', new_folder_path %>
-
-
-  </div>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

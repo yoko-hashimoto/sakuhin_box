@@ -26,7 +26,7 @@ body {
 }
 
 
-.artworks-index,.creator-artworks-index {
+.artworks-index,.creator-artworks-index, .artwork-form {
   h3 {
     text-align: center;
     font-weight: bold;
@@ -169,5 +169,29 @@ body {
   a {
     color: #000;
   }
+}
 
+.artwork-form {
+  ul {
+  list-style: none;
+  }
+  textarea {
+    resize: none;
+  }
+}
+
+.new-artwork {
+  h3 {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  .back-button{
+    text-align: center
+  }
+  a {
+    color: #000;
+    font-size: 2rem;
+  }
 }

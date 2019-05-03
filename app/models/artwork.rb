@@ -3,8 +3,7 @@ class Artwork < ApplicationRecord
 
   # 複数のartworkは１つのfolderに属している
   # optional: true を記述する事でバリデーションエラーを回避
-  # belongs_to :folder, optional: true
-  belongs_to :folder
+  belongs_to :folder, optional: true
 
   validates :image, presence: true
   validates :caption, presence: true

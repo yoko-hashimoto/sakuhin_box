@@ -1,3 +1,7 @@
 .dropdown-menu{
   padding-left: 8px;
 }
+
+textarea.form-control {
+  height: 100px;
+}

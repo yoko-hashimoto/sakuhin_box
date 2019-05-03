@@ -1,0 +1,105 @@
+<div class = "artwork-form">
+
+  <!--<div class="container">-->
+
+    <div class="form-horizontal" role="form">
+      <%= form_with(model: artwork, local: true) do |form| %>
+
+        <% if artwork.errors.any? %>
+          <div id="error_explanation" class="col-sm-offset-2 col-sm-10">
+            <h2><%= artwork.errors.count %>件のエラーがあります。</h2>
+            <ul>
+            <% artwork.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <!-- 確認画面から新規作成画面に戻った時等に、アップロードした画像を表示させるための記述 -->
+              <!-- img-responsive によって画像をレスポンシブに対応 -->
+              <p><%= image_tag(artwork.image.url, :class => "img-responsive") if artwork.image.url %></p>
+              <%= form.hidden_field :image_cache %>
+            </div>
+            
+          <%= form.label :image, "作品画像", class: "col-sm-offset-2 col-sm-2 control-label" %>
+          <div class = "col-sm-4">
+            <%= form.file_field :image, id: 'lefile', style:"display:none;" %>
+            <div class="input-group">
+              <input type="text" id="photoCover"  class="form-control" placeholder="select file...">
+              <span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('input[id=lefile]').click();">画像を選択</button></span>
+            </div>
+
+            <script>
+              $('input[id=lefile]').change(function() {
+                $('#photoCover').val($(this).val().replace("C:\\fakepath\\", ""));
+              });
+            </script>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :coption, "ひとこと", class: "col-sm-offset-2 col-sm-2 control-label" %>
+          <div class="col-sm-4">
+            <%= form.text_area :caption, placeholder: 'ひとこと', class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :created_date, '作った時期', class: "col-sm-offset-2 col-sm-2 control-label" %>
+            <div class="col-sm-4">
+              <%= form.date_select :created_date, discard_day: true, use_month_numbers: true, start_year: Time.now.year - 10, end_year: Time.now.year, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :is_published, "公開設定", class: "col-sm-offset-2 col-sm-2 control-label" %>
+          <div class="col-sm-4">
+            <div class="radio-inline">
+              <%# 作品の公開設定をbooliean型の、is_publishedカラムで設定する %>
+              <label><%= form.radio_button :is_published, true %>公開する</label>
+            </div>
+            <div class="radio-inline">
+              <%# :checked => true によってデフォルトでチェックを付けた状態にする %>
+              <label><%= form.radio_button :is_published, false, :checked => true %>公開しない</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <% creator_options = current_user.creators.order(:id).map { |c| [c.name, c.id, data: { children_path: creator_folders_path(c) }] } %>
+          <%= form.label :name, "クリエイター", class: "col-sm-offset-2 col-sm-2 control-label" %>
+          <div class="col-sm-4">
+            <%= form.select :creator_id, creator_options, { :prompt => "選択" }, class: "select-parent form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :folder_name, "フォルダ", class: "col-sm-offset-2 col-sm-2 control-label" %>
+          <% folders = artwork.creator.try(:folders) || [] %>
+          <% folder_options = folders.map { |c| [c.folder_name, c.id] } %>
+          <div class="col-sm-4">
+            <%= form.select :folder_id, folder_options, { :prompt => "選択" }, class: "select-children form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :folder, "フォルダ新規作成", class: "col-sm-offset-2 col-sm-2 control-label" %>
+          <div class="col-sm-4">
+            <%= form.text_field :new_folder_name, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class = "col-sm-offset-4 col-sm-4">
+            <%= form.submit :class => "btn btn-default" %>
+          </div>
+        </div>
+        
+      <% end %>
+    </div>
+  <!--</div>-->
+
+</div>

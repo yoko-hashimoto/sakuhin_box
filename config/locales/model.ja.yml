@@ -8,7 +8,7 @@ ja:
     attributes:
       artwork:
         image: "作品画像"
-        caption: "一言"
+        caption: "ひとこと"
         created_date: "作った時期"
         is_published: "公開設定"
       creator:

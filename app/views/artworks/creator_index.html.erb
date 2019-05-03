@@ -21,8 +21,8 @@
             <!-- フォルダ名を一つずつ表示-->
             <% @folders.each do |folder| %>
               <!-- folder_artworks_path(folder.id) によって folder の id 付きで artworks#index が呼ばれる -->
+              <%#= link_to artworks_path(folder_id: folder.id) do %>
               <%= link_to folder_artworks_path(folder.id) do %>
-              <%#= link_to folder_artworks_path(folder.id) do %>
                 <p class = "folder-name"><i class="far fa-folder"></i> <%= folder.folder_name %></p>
               <% end%>
             <% end%>
