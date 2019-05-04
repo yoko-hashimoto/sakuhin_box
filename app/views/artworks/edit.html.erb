@@ -1,0 +1,13 @@
+<div class = "edit-artwork">
+  <div class="container">
+
+    <h3>作品編集</h3>
+
+    <%= render 'form', artwork: @artwork %>
+
+    <div class = "back-button">
+      <%= link_to 'Back', artwork_path(@artwork.id) %>
+    </div>
+
+  </div>
+</div>

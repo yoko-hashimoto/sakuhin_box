@@ -89,9 +89,18 @@ class ArtworksController < ApplicationController
   end
   
   def show
+
+    @creator = Creator.where(id: @artwork.creator_id)
+
   end
 
   def update
+    if @artwork.update(artwork_params)
+      redirect_to artworks_path, notice: "作品を編集しました！"
+    else
+      render "edit"
+    end
+
   end
 
   def destroy

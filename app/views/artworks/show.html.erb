@@ -34,7 +34,7 @@
                 </div>
                 <div class="edit_button">
                   <%# 編集ボタンの表示 %>
-                  <%= link_to edit_artwork_path(@artwork.id), data: { confirm: '本当に編集していいですか？' } do %>
+                  <%= link_to edit_artwork_path(@artwork.id) do %>
                     <i class="far fa-edit fa-lg"></i>
                   <% end %>
                 </div>
@@ -44,6 +44,12 @@
 
         </div>
       </div>
+    </div>
+
+    <br>
+    <div class = "back-button">
+      <%#= link_to '自分の作品', creator_artworks_path(@creator) %>
+      <%= link_to 'Back', artworks_path %>
     </div>
   </div>
 </div>
