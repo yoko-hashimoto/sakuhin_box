@@ -104,6 +104,8 @@ class ArtworksController < ApplicationController
   end
 
   def destroy
+    @artwork.destroy
+    redirect_to artworks_path, notice:" 作品を削除しました！"
   end
 
   private
