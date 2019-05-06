@@ -2,10 +2,48 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .creator-detail {
+  font-size: 1.8rem;
+  a {
+    color: #333333;
+  }
   .image {
     width: 150px;
+    margin: auto;
+
     img {
       width: 100%;
     }
   }
+  .creator-information {
+    text-align: left;
+    width: 15em;
+    margin: auto;
+    margin-top: 30px;
+  }
+  .creator-name {
+    text-align: center;
+    font-weight:bold;
+    font-size: 3rem;
+    margin: 10px;
+  }
+  .creator-wrapper {
+    margin: 50px;
+  }
+}
+
+.edit-creator {
+  ul {
+    list-style: none;
+  }
+  .back-button{
+    text-align: center
+  }
+  a {
+    color: #000;
+    font-size: 2rem;
+  }
+  .form {
+    margin: 50px;
+  }
+
 }

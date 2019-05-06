@@ -29,6 +29,11 @@ class CreatorsController < ApplicationController
   end
 
   def update
+    if @creator.update(creator_params)
+      redirect_to creator_path, notice: "クリエイター情報を編集しました"
+    else
+      render 'edit'
+    end
   end
 
   def destroy
