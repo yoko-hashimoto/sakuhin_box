@@ -14,11 +14,11 @@
       width: 100%;
     }
   }
-  .creator-information {
+  .creator-infomation {
     text-align: left;
-    width: 15em;
+    // width: 17em;
+    width: 296px;
     margin: auto;
-    margin-top: 30px;
   }
   .creator-name {
     text-align: center;
@@ -27,11 +27,11 @@
     margin: 10px;
   }
   .creator-wrapper {
-    margin: 50px;
+    margin: 40px;
   }
 }
 
-.edit-creator {
+.new-creator, .edit-creator {
   ul {
     list-style: none;
   }
@@ -42,8 +42,7 @@
     color: #000;
     font-size: 2rem;
   }
-  .form {
+  .creator-wrapper {
     margin: 50px;
   }
-
 }

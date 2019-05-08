@@ -1,26 +1,11 @@
-<h1>クリエイター登録画面</h1>
-<%= form_with(model: @creator, local: true) do |form| %>
+<div class = "new-creator">
+  <div class = "container">
+  
+    <%= render 'form', creator: @creator %>
 
-  <% if @creator.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= @creator.errors.count %>件のエラーがあります。</h2>
-      <ul>
-        <% @creator.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class = "back-button">
+      <%= link_to 'Back', artworks_path %>
     </div>
-  <% end%>
-
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    
   </div>
-  <div>
-    <%= form.label :icon %>
-    <%= form.file_field :icon %>
-  </div>
-  <%= form.submit %>
-<% end %>
-
-
+</div>
