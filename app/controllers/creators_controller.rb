@@ -1,7 +1,7 @@
 class CreatorsController < ApplicationController
   # 下記のアクションは、ログイン中のみ許可する
   before_action :authenticate_user!
-  before_action :set_creator, only:[:show, :edit, :update]
+  before_action :set_creator, only:[:show, :edit, :update, :destroy]
 
   def index
   end
@@ -37,6 +37,8 @@ class CreatorsController < ApplicationController
   end
 
   def destroy
+    @creator.destroy
+    redirect_to artworks_path, notice:"クリエイターを削除しました！"
   end
 
   private

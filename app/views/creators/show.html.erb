@@ -32,7 +32,7 @@
         </p>
         <br>
         <p>
-          <span><%= link_to "#" do %></span>
+          <span><%= link_to creator_path(@creator.id), method: :delete, data: { confirm: '本当に削除していいですか？' } do %></span>
             <i class="fas fa-exclamation-triangle fa-lg"></i>
             <span>クリエイター情報を削除する</span>
           <% end %>

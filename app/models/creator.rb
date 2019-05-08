@@ -4,7 +4,7 @@ class Creator < ApplicationRecord
   belongs_to :user, optional: true
   
   # クリエイターは複数の作品を保有している
-  has_many :artworks
+  has_many :artworks, dependent: :destroy
   has_many :folders, ->{ order(:id) }
 
   validates :name, presence: true
