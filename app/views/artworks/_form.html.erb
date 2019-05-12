@@ -20,7 +20,7 @@
           <div class="col-sm-offset-2 col-sm-10">
             <!-- 確認画面から新規作成画面に戻った時等に、アップロードした画像を表示させるための記述 -->
             <!-- img-responsive によって画像をレスポンシブに対応 -->
-            <p><%= image_tag(artwork.image.url, :class => "img-responsive") if artwork.image.url %></p>
+            <p><%= image_tag(artwork.image.url, :class => "img-responsive") if artwork.image && artwork.image.url %></p>
             <%= form.hidden_field :image_cache %>
           </div>
             

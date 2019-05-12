@@ -12,20 +12,20 @@ class ArtworksController < ApplicationController
 
       #（以下の場合、パラメーターに含まれる creator_id と foldersテーブルの creator_id カラムが一致する物を取り出す ）
       @folders = Folder.where(creator_id: params[:creator_id]).order(updated_at: "DESC")
-      # クリエイターに紐付く作品一覧画面を表示させる
 
       @creator = Creator.find_by(id: params[:creator_id])
-      
+
+      # クリエイターに紐付く作品一覧画面を表示させる
       render :creator_index
 
     # パラメーターに folder_id が含まれる（フォルダに紐付いた作品のみ表示させる）場合
     elsif params[:folder_id]
-      folder = Folder.find(params[:folder_id])
+      @folder = Folder.find(params[:folder_id])
       # そのフォルダに紐付く作品のみ、全て取得する
       #（以下の場合、パラメーターに含まれる folder_id と artworksテーブルの folder_id カラムが一致する物を取り出す ）
       @artworks = Artwork.where(folder_id: params[:folder_id]).order(updated_at: "DESC")
       #（以下の場合、パラメーターに含まれる creator_id と foldersテーブルの creator_id カラムが一致する物を取り出す ）
-      @folders = Folder.where(creator_id: folder.creator).order(updated_at: "DESC")
+      @folders = Folder.where(creator_id: @folder.creator).order(updated_at: "DESC")
       # フォルダに紐付く作品一覧画面を表示させる
       render :folder_index
 

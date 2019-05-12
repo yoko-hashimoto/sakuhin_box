@@ -16,7 +16,7 @@
 
       <div class= "form-group">
         <div class="col-sm-12">
-          <p><%= image_tag(creator.icon.url, :class => "img-responsive center-block", size: "150x150") if creator.icon.url %></p>
+          <p><%= image_tag(creator.icon.url, :class => "img-responsive center-block", size: "150x150") if creator.icon && creator.icon.url %></p>
           <%= form.hidden_field :icon_cache %>
         </div>
       </div>

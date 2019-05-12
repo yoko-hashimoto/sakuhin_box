@@ -6,7 +6,7 @@
 
 
     <div class = "row">
-      <div class="col-sm-12 col-md-2">
+      <div class="col-xs-12 col-sm-3 col-md-2">
         
         <div class = "folder-dropdown">
           <div class="dropdown">
@@ -16,7 +16,7 @@
             </a>
             <ul class="dropdown-menu" role="menu">
 
-              <h4><span class ="folder-top"><i class="far fa-folder-open"></i> フォルダ</span></h4>
+              <!--<h4><span class ="folder-top"><i class="far fa-folder-open"></i> フォルダ</span></h4>-->
 
             <!-- フォルダ名を一つずつ表示-->
             <% @folders.each do |folder| %>
@@ -26,27 +26,9 @@
                 <p class = "folder-name"><i class="far fa-folder"></i> <%= folder.folder_name %></p>
               <% end%>
             <% end%>
-              
-              <!--
-              <%# 新しく空の配列を作る %>
-              <% folder_lists = [] %>
-              <% @artworks.each do |artwork| %>
-              <%# artworkに紐付いたfolder_listを配列のfolder_listsに１つずつ追加していく %>
-              
-              <% end %>
-              <%# 重複しているフォルダ名を取り除く%>
-              <% folders = folder_lists.uniq %>
-
-              <%# フォルダ名を１つずつ表示させる%>
-              <% folders.each do |folder| %>
-              <li><a href="#"><i class="far fa-folder"></i> <%= folder %></a></li>
-              <% end %>-->
-
-              
             </ul>
           </div>
         </div>
-
 
         <div Class = "folder-list">
           <h4><span class ="folder-top"><i class="far fa-folder-open"></i> フォルダ</span></h4>
@@ -57,43 +39,21 @@
                 <p class = "folder-name"><i class="far fa-folder"></i> <%= folder.folder_name %></p>
               <% end%>
             <% end%>
-            
-          <!--<% @artworks.each do |artwork| %>
-         
-          <% end%> -->
-
-
-          <!--
-          <% folder_lists = [] %>
-          <% @artworks.each do |artwork| %>
-          <%# artworkに紐付いたfolder_listを配列のfolder_listsに１つずつ追加していく %>
-          
-          <% end %>
-          <%# 重複しているフォルダ名を取り除く %>
-          <% folders = folder_lists.uniq %>
-
-          <%# フォルダ名を１つずつ表示させる%>
-          <% folders.each do |folder| %>
-
-
-
-          <%# tag_nameにfolderのタグ名をパラメータとして渡す%>
-          <%= link_to "#" do %>
-          <p class = "folder-name"><i class="far fa-folder"></i> <%= folder %></p>
-          <% end %>
-
-
-          <% end %> -->
 
           <!--<p><%= link_to "フォルダを追加する" %></p> -->
         </div>
 
-
         <br>
+
+        <!-- Ajaxでモーダル実装 -->
+        <p><%= link_to "フォルダを追加", new_folder_path, remote: true, class: "btn btn-sm btn-primary" %></p>
+        <div id="folder-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
         <!-- モーダル表示用のボタン -->
-        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#folder">
+        <button type="button" class="btn btn-info modal-btn btn-sm" data-toggle="modal" data-target="#folder">
           フォルダを追加
         </button>
+
 
         <!-- モーダル・ダイアログ -->
         <div class="modal fade" id="folder" tabindex="-1">
@@ -124,18 +84,17 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-                <button type="button" class="btn btn-info">追加</button>
+                <button type="button" class="btn btn-info modal-btn">追加</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <br>
-      <div class="col-sm-12 col-md-10">
+      <div class="col-xs-12 col-sm-6 col-md-10">
         <div class = "row">
           <% @artworks.each do |artwork| %>
-          <div class = "col-xs-12 col-sm-6 col-md-6">
+          <div class = "col-xs-12 col-md-6">
             <div class = "thumbnail">
               <div class = "artwork">
               <%= link_to artwork do%>

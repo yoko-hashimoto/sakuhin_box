@@ -1,27 +1,34 @@
-<%= form_with(model: folder, local: true) do |form| %>
-  <% if folder.errors.any? %>
-    <div id="error_explanation">
-      <!--<h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>-->
-      <h2><%= folder.errors.count %> 件のエラーがあります。</h2>
-
-      <ul>
-      <% folder.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="modal-dialog">
+  <div class="modal-content modal-sm">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+      <h4 class="modal-title">フォルダを追加</h4>
     </div>
-  <% end %>
+    <div class="modal-body">
+      <%= form_with(model: folder, remote: true) do |form| %>
+        <% if folder.errors.any? %>
+          <div id="error_explanation">
+            <!--<h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>-->
+            <h2><%= folder.errors.count %> 件のエラーがあります。</h2>
 
-  <div class="field">
-    <%= form.fields_for :folders do |artwork| %>
-      <%= form.label :folder_name %>
-      <%= form.text_field :folder_name %>
+            <ul>
+            <% folder.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-      <%#= form.hidden_field :creator_id , :value => "artwork.creator_id" %>
-    <% end %>
+      <div class = "form-group">
+        <%= form.label :folder_name, "フォルダ名", class: "control-label" %>
+        <%= form.text_field :folder_name, class: "form-control" %>
+      </div>
+
+      <div class="modal-footer">
+        <%= form.submit "追加", :class => "btn btn-primary" %>
+      </div>
+
+      <% end %>
+      
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

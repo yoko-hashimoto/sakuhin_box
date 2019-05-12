@@ -2,7 +2,7 @@ class FoldersController < ApplicationController
   before_action :set_folder, only: [:show, :edit, :update, :destroy]
 
   def index
-    # @folders = Folder.all
+    @folders = Folder.all
 
     creator = Creator.find(params[:creator_id])
     render json: creator.folders.select(:id, :folder_name)
@@ -18,7 +18,10 @@ class FoldersController < ApplicationController
   def new
     @folder = Folder.new
 
-    @folder.artworks.build
+    respond_to do |format|
+        format.html { }
+        format.js { }
+    end
   end
 
   def edit
@@ -26,16 +29,27 @@ class FoldersController < ApplicationController
 
   def create
     @folder = Folder.new(folder_params)
-
-    @folder.creator_id = params[:creator_id]
-
-    # @folder.creator_id = current_user.id
-
-    if @folder.save
-      redirect_to new_artwork_path, notice: "フォルダを追加しました！"
-    else
-      render 'new'
+    
+    
+    respond_to do |format|
+      if @folder.save
+        format.html { redirect_to @folder, notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: @folder }
+        format.js { @status = "success"}
+      else
+        format.html { render :new }
+        format.json { render json: @folder.errors, status: :unprocessable_entity }
+        format.js { @status = "fail" }
+      end
     end
+
+    # @folder = Folder.new(folder_params)
+    # @folder.creator_id = params[:creator_id]
+    # if @folder.save
+    #   redirect_to new_artwork_path, notice: "フォルダを追加しました！"
+    # else
+    #   render 'new'
+    # end
 
     # respond_to do |format|
     #   if @folder.save
@@ -50,6 +64,9 @@ class FoldersController < ApplicationController
 
   def update
     @folder.update(folder_params)
+
+    @folders = Folder.all
+
   end
 
   def destroy
@@ -62,6 +79,6 @@ class FoldersController < ApplicationController
   end
 
   def folder_params
-    params.require(:folder).permit(:folder_name)
+    params.require(:folder).permit(:folder_name, :creator_id)
   end
 end

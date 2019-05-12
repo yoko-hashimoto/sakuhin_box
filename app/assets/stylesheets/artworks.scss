@@ -25,7 +25,7 @@ body {
   margin-bottom: 60px;
 }
 
-.artworks-index,.creator-artworks-index, .artwork-form {
+.artworks-index,.creator-artworks-index, .folder-artworks-index, .artwork-form {
   h3 {
     text-align: center;
     font-weight: bold;
@@ -71,7 +71,7 @@ body {
   }
 }
 
-.creator-artworks-index {
+.creator-artworks-index, .folder-artworks-index {
   @media (max-width: 767px) {
     .folder-dropdown {
         display: block!important;
@@ -94,6 +94,10 @@ body {
     .folder-list {
         display: block!important;
     }
+  }
+
+  .modal-btn { 
+    margin-bottom: 15px;
   }
 }
 
@@ -203,3 +207,7 @@ body {
     font-size: 2rem;
   }
 }
+
+// .modal-btn { 
+//   margin-bottom: 15px;
+// }

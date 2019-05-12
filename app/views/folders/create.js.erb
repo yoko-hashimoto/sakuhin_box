@@ -1,0 +1,6 @@
+<% if @status == 'success' %>
+$("tbody").append("<%= j(render("folder_list", folder: @folder)) %>");
+<%  elsif @status == 'fail' %>
+alert('error!');
+<% end %>
+$("#folder-modal").modal("hide");
