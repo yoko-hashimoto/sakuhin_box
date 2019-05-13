@@ -76,3 +76,6 @@ gem 'bootstrap-sass'
 gem 'sassc-rails'
 
 gem 'rails-ujs'
+
+gem 'kaminari', '~> 0.17.0'
+gem 'kaminari-bootstrap', '~> 3.0.1'

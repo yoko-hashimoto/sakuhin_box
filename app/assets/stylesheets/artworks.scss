@@ -207,7 +207,10 @@ body {
     font-size: 2rem;
   }
 }
+ 
+.artworks-index, .creator-artworks-index, .folder-artworks-index {
+  .pagination-wrapper {
+    text-align: center;
+  }
+}
 
-// .modal-btn { 
-//   margin-bottom: 15px;
-// }
