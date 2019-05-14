@@ -10,7 +10,6 @@ class ArtworksController < ApplicationController
       #（以下の場合、パラメーターに含まれる creator_id と artworksテーブルの creator_id カラムが一致する物を取り出す ）
       @artworks = Artwork.where(creator_id: params[:creator_id]).page(params[:page]).per(12).order(updated_at: "DESC")
       
-
       #（以下の場合、パラメーターに含まれる creator_id と foldersテーブルの creator_id カラムが一致する物を取り出す ）
       @folders = Folder.where(creator_id: params[:creator_id]).order(updated_at: "DESC")
 
