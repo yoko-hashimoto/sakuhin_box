@@ -6,8 +6,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # 保存形式の設定
-  storage :file
-  # storage :fog
+  # storage :file
+  storage :fog
 
   # 画像サイズの調整
   process :resize_to_limit => [700, 700]
