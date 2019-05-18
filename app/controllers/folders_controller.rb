@@ -1,5 +1,5 @@
 class FoldersController < ApplicationController
-  before_action :set_folder, only: [:show, :edit, :update, :destroy]
+  before_action :set_folder, only: [:edit, :update, :destroy]
 
   def index
     @folders = Folder.all
@@ -7,12 +7,6 @@ class FoldersController < ApplicationController
     creator = Creator.find(params[:creator_id])
     render json: creator.folders.select(:id, :folder_name)
 
-  end
-
-  def show
-    #（以下の場合、パラメーターに含まれる creator_id と artworksテーブルの creator_id カラムが一致する物を取り出す ）
-    # @artworks = Artwork.where(creator_id: params[:creator_id]).order(updated_at: "DESC")
-    @artworks = Artwork.where(folder_id: params[:folder_id]).order(updated_at: "DESC")
   end
 
   def new

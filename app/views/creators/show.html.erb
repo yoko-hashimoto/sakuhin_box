@@ -25,7 +25,7 @@
         <p>
           <%# @creator は @creator.id のこと%>
           <%# creator_artworks_path(@creator) によって creator の id 付きで artworks#index が呼ばれる %>
-          <span><%= link_to creator_artworks_path(@creator) do %></span>
+          <span><%= link_to artworks_path(creator_id: @creator.id) do %></span>
             <i class="far fa-images fa-lg"></i>
             <span>自分の作品を見る</span>
           <% end %>

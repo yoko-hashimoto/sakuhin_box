@@ -16,8 +16,6 @@ Rails.application.routes.draw do
   resources :users, :only => [:update, :show, :edit, :destroy]
 
   resources :folders do 
-    # folderに紐付いたartworkのみ表示させる為、入れ子でルーティングを設定
-    resources :artworks, :only => [:index]
   end
 
   if Rails.env.development?

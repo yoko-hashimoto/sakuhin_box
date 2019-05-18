@@ -8,7 +8,7 @@ class ArtworksController < ApplicationController
     if params[:creator_id]
       # そのクリエイターに紐付く作品のみ、全て取得する
       #（以下の場合、パラメーターに含まれる creator_id と artworksテーブルの creator_id カラムが一致する物を取り出す ）
-      @artworks = Artwork.where(creator_id: params[:creator_id]).page(params[:page]).per(12).order(updated_at: "DESC")
+      @artworks = Artwork.where(creator_id: params[:creator_id])
       
       #（以下の場合、パラメーターに含まれる creator_id と foldersテーブルの creator_id カラムが一致する物を取り出す ）
       @folders = Folder.where(creator_id: params[:creator_id]).order(updated_at: "DESC")
@@ -16,23 +16,29 @@ class ArtworksController < ApplicationController
       @creator = Creator.find_by(id: params[:creator_id])
 
       # クリエイターに紐付く作品一覧画面を表示させる
-      render :creator_index
+      template_name = :creator_index
 
     # パラメーターに folder_id が含まれる（フォルダに紐付いた作品のみ表示させる）場合
     elsif params[:folder_id]
       @folder = Folder.find(params[:folder_id])
       # そのフォルダに紐付く作品のみ、全て取得する
       #（以下の場合、パラメーターに含まれる folder_id と artworksテーブルの folder_id カラムが一致する物を取り出す ）
-      @artworks = Artwork.where(folder_id: params[:folder_id]).page(params[:page]).per(12).order(updated_at: "DESC")
+      @artworks = Artwork.where(folder_id: params[:folder_id])
       #（以下の場合、パラメーターに含まれる creator_id と foldersテーブルの creator_id カラムが一致する物を取り出す ）
       @folders = Folder.where(creator_id: @folder.creator).order(updated_at: "DESC")
       # フォルダに紐付く作品一覧画面を表示させる
-      render :folder_index
+      template_name = :folder_index
 
     else
       # Artwork.published で artworkモデルで定義したスコープ published を呼びだす
-      @artworks = Artwork.published.page(params[:page]).per(12).order(updated_at: "DESC")
+      @artworks = Artwork.published
+      template_name = :index
     end
+
+    @artworks = @artworks.page(params[:page]).per(12).order(updated_at: "DESC")
+
+    render template_name
+
   end
 
   def new
