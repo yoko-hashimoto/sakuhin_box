@@ -37,6 +37,12 @@
             <% end %>
         </div>
 
+        <div class = "folder-setting">
+          <%= link_to folders_path(creator_id: @creator.id) do %>
+            <p><i class="fas fa-cog"></i> フォルダ編集</p>
+          <% end%>
+        </div>
+
         <br>
 
         <div class = modal-display>

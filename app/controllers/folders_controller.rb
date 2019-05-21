@@ -1,20 +1,26 @@
 class FoldersController < ApplicationController
+  # 下記のアクションは、ログイン中のみ許可する
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_folder, only: [:edit, :update, :destroy]
 
   def index
-    @folders = Folder.all
+    respond_to do |format|
+      @folders = params[:creator_id].present? ? Folder.where(creator_id: params[:creator_id]) : []
+      @creator = Folder.where(creator_id: params[:creator_id])
+      
+      format.html { render :index }
 
-    creator = Creator.find(params[:creator_id])
-    render json: creator.folders.select(:id, :folder_name)
-
+      creator = Creator.find(params[:creator_id]) if params[:creator_id].present?
+      format.js { render json: creator.folders.select(:id, :folder_name) }
+    end
   end
 
   def new
     @folder = Folder.new
 
     respond_to do |format|
-        format.html { }
-        format.js { }
+      format.html { }
+      format.js { }
     end
   end
 
@@ -56,13 +62,24 @@ class FoldersController < ApplicationController
   end
 
   def update
-    @folder.update(folder_params)
-
-    @folders = Folder.all
+    if @folder.update(folder_params)
+      redirect_to folders_path(creator_id: @folder.creator_id), notice: "フォルダ名を編集しました！"
+    else
+      render "edit"
+    end
 
   end
 
   def destroy
+    # artworkに紐付くfolder_idを全てnillにする
+    artworks = Artwork.where(folder_id: @folder.id)
+    artworks.update(folder_id: [])
+    
+    @creator = Folder.find(@folder.creator_id)
+
+    @folder.destroy
+    redirect_to folders_path(creator_id: @creator.id), notice:" フォルダを削除しました！"
+
   end
 
   private

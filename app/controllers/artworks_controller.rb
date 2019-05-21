@@ -26,6 +26,8 @@ class ArtworksController < ApplicationController
       @artworks = Artwork.where(folder_id: params[:folder_id])
       #（以下の場合、パラメーターに含まれる creator_id と foldersテーブルの creator_id カラムが一致する物を取り出す ）
       @folders = Folder.where(creator_id: @folder.creator).order(updated_at: "DESC")
+
+      @creator = Creator.find_by(id: @folder.creator_id)
       # フォルダに紐付く作品一覧画面を表示させる
       template_name = :folder_index
 
