@@ -97,13 +97,30 @@ class ArtworksController < ApplicationController
   end
   
   def show
-
     @creator = Creator.where(id: @artwork.creator_id)
-
   end
 
   def update
+    folder_id = params[:artwork][:folder_id]
+
+    new_folder_name = params[:artwork][:new_folder_name]
+
+    creator_id = params[:artwork][:creator_id]
+    creator = Creator.find(creator_id)
+
+    # new_folder_name が空の場合(フォルダの新規登録欄に何も入力されていない場合)
+    if new_folder_name.blank?
+      @artwork.folder_id = folder_id
+    end
+
     if @artwork.update(artwork_params)
+      # new_folder_name に値がある場合(フォルダの新規登録欄にフォルダ名を入力した場合)
+      if new_folder_name.present?
+        #folder を作成する
+        folder = Folder.create(creator_id: creator.id, folder_name: new_folder_name)
+        @artwork.update(folder_id: folder.id)
+      end
+
       redirect_to artworks_path, notice: "作品を編集しました！"
     else
       render "edit"
