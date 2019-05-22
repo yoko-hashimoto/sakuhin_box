@@ -3,43 +3,46 @@
 <div class = "artwork-detail">
   <div class = "container">
     <div class = "row post">
-      <div class = "col-xs-12 col-sm-12 col-md-offset-2 col-md-8">
-        <div class = "artwork">
-          <p class = "image">
-            <!-- img-responsive によって画像をレスポンシブに対応、center-block によりセンター寄せに設定 -->
-            <%= image_tag @artwork.image.url, :class => "img-responsive center-block" %>
-          </p>
-          <p class = "creator-name">
-            <%= @artwork.creator.name %>
-          </p>
-          <p class = "caption">
-            <%= @artwork.caption %>
-          </p>
-          <p class = "created-date">
-            <span>作った時期 < <%= @artwork.created_date %>></span>
-          </p>
-          <p class = "date">
-            <%= @artwork.created_at.strftime("%Y-%m-%d %H:%M ") %>
-          </p>
+      <div class = "col-xs-12 col-sm-offset-2 col-sm-8">
+        <div class = "thumbnail">
 
-          <div>
-            <!-- artwork を投稿した user のidと current_user (ログイン中のuserのid)が同じ場合 -->
-            <% if @artwork.creator.user_id == current_user.id %>
-              <div class="buttons">
-                <div class="delete_button">
-                  <%# 削除ボタンの表示 %>
-                  <%= link_to artwork_path(@artwork.id), method: :delete, data: { confirm: '本当に削除していいですか？' } do %>
-                    <i class="far fa-trash-alt fa-lg"></i>
-                  <% end %>
+          <div class = "artwork">
+            <p class = "image">
+              <!-- img-responsive によって画像をレスポンシブに対応、center-block によりセンター寄せに設定 -->
+              <%= image_tag @artwork.image.url, :class => "img-responsive center-block " %>
+            </p>
+            <p class = "creator-name">
+              <%= @artwork.creator.name %>
+            </p>
+            <p class = "caption">
+              <%= @artwork.caption %>
+            </p>
+            <p class = "created-date">
+              <span>作った時期 < <%= @artwork.created_date %>></span>
+            </p>
+            <p class = "date">
+              <%= @artwork.created_at.strftime("%Y-%m-%d %H:%M ") %>
+            </p>
+
+            <div>
+              <!-- artwork を投稿した user のidと current_user (ログイン中のuserのid)が同じ場合 -->
+              <% if @artwork.creator.user_id == current_user.id %>
+                <div class="buttons">
+                  <div class="delete_button">
+                    <%# 削除ボタンの表示 %>
+                    <%= link_to artwork_path(@artwork.id), method: :delete, data: { confirm: '本当に削除していいですか？' } do %>
+                      <i class="far fa-trash-alt fa-lg"></i>
+                    <% end %>
+                  </div>
+                  <div class="edit_button">
+                    <%# 編集ボタンの表示 %>
+                    <%= link_to edit_artwork_path(@artwork.id) do %>
+                      <i class="far fa-edit fa-lg"></i>
+                    <% end %>
+                  </div>
                 </div>
-                <div class="edit_button">
-                  <%# 編集ボタンの表示 %>
-                  <%= link_to edit_artwork_path(@artwork.id) do %>
-                    <i class="far fa-edit fa-lg"></i>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
 
         </div>
@@ -47,8 +50,10 @@
     </div>
 
     <div class = "back-button">
-      <%#= link_to '自分の作品', creator_artworks_path(@creator) %>
-      <%= link_to 'Back', artworks_path %>
+      <%= link_to 'みんなの作品', artworks_path %>
+      <span class = "partition"> | </span>
+      <%= link_to '自分の作品', creator_artworks_path(@creator.id) %>
     </div>
+
   </div>
 </div>

@@ -93,7 +93,7 @@ class ArtworksController < ApplicationController
   end
   
   def show
-    @creator = Creator.where(id: @artwork.creator_id)
+    @creator = Creator.find(@artwork.creator_id)
   end
 
   def update
