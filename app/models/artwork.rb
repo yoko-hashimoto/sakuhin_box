@@ -8,6 +8,7 @@ class Artwork < ApplicationRecord
   validates :image, presence: true
   validates :caption, presence: true
   validates :created_date, presence: true
+  validates :is_published, presence: true
   
   mount_uploader :image, ImageUploader
  

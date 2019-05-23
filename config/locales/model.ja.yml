@@ -11,6 +11,7 @@ ja:
         caption: "ひとこと"
         created_date: "作った時期"
         is_published: "公開設定"
+        creator: "クリエイター"
       creator:
         name: "名前"
         icon: "アイコン"
