@@ -122,7 +122,7 @@ class ArtworksController < ApplicationController
 
   def destroy
     @artwork.destroy
-    redirect_to artworks_path, notice:" 作品を削除しました！"
+    redirect_to creator_artworks_path(@artwork.creator_id), notice:" 作品を削除しました！"
   end
 
   private
