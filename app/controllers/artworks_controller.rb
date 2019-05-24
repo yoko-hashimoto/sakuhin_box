@@ -72,7 +72,7 @@ class ArtworksController < ApplicationController
         @artwork.update(folder_id: folder.id)
       end
       
-      redirect_to artworks_path, notice: "作品を投稿しました！"
+      redirect_to creator_artworks_path(@artwork.creator_id),notice: "作品を編集しました！"
     else
       render 'new'
     end
@@ -113,7 +113,7 @@ class ArtworksController < ApplicationController
         @artwork.update(folder_id: folder.id)
       end
 
-      redirect_to artworks_path, notice: "作品を編集しました！"
+      redirect_to creator_artworks_path(@artwork.creator_id),notice: "作品を編集しました！"
     else
       render "edit"
     end
