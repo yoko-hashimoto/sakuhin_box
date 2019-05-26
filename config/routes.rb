@@ -2,11 +2,14 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
-  root 'artworks#index'
+  # root 'artworks#index'
+  root 'tops#index'
+
+  resources :tops, only: [:index]
 
   resources :creators do
     # クリエイターの詳細画面から、そのクリエイターに紐付いた作品一覧画面に遷移する為、入れ子でルーティングを設定
-    resources :artworks, :only => [:index]
+    resources :artworks, only: [:index]
     # Ajaxで呼ばれてフォルダの一覧を返すアクション
     resources :folders
   end
