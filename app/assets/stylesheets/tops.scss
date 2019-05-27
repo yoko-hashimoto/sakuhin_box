@@ -1,0 +1,91 @@
+// Place all the styles related to the tops controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.top {
+    .top-content {
+      position: relative;
+    }
+
+  @media (max-width: 991px) {
+    .top-content {
+      .responsive-message {
+        position: absolute;
+
+        top: 27%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        margin:0;
+        padding:0;
+
+        color: #fff;
+        font-weight: bold;
+        font-size: 2.2rem;
+        line-height: 2;
+      }
+    }
+
+    .top-content img {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 767px) {
+    .top-content {
+      .responsive-message {
+        font-size: 3.5rem;
+        line-height: 2;
+        top: 30%;
+      }
+      .top-message {
+        font-size: 2rem;
+        width: 23em;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  @media (min-width: 992px) {
+    .top-content {
+      .top-message {
+        position: absolute;
+
+        top: 52%;
+        left: 51%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        margin:0;
+        padding:0;
+
+        color: #fff;
+        font-weight: bold;
+        font-size: 2.3rem;
+        line-height: 2;
+      }
+    }
+
+    .responsive-message {
+      display: none;
+    }
+
+    .top-content img {
+      width: 100%;
+    }
+  }
+
+  .top-message {
+  margin: 1.7em;
+  }
+
+  .signup-button { 
+    margin-right: 15px;
+    margin-top: 40px;
+  }
+  .login-button {
+    margin-top: 40px;
+  }
+}

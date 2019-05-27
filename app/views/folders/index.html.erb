@@ -1,0 +1,43 @@
+<div class = "folder-index">
+  <div class = "container">
+    <h3>フォルダ一覧</h3>
+    
+    <div class = "folder">
+      <% @folders.each do |folder| %>
+
+        <!-- folder を作成↓した user のidと current_user (ログイン中のuserのid)が同じ場合 -->
+        <% if folder.creator.user_id == current_user.id %>
+
+          <div class = "row">
+            <div class = "folder-name col-xs-6 col-xs-offset-1 col-sm-3 col-sm-offset-4">
+              <p><%= folder.folder_name %></p>
+            </div>
+            <div class="buttons col-xs-4 col-sm-3">
+
+              <%# 編集ボタンの表示 %>
+              <div class="edit_button">
+                <%= link_to edit_folder_path(folder.id, creator_id: folder.creator_id) do %>
+                  <i class="far fa-edit fa-lg"></i>
+                <% end %>
+              </div>
+
+              <%# 削除ボタンの表示 %>
+              <div class="delete_button">
+                <%= link_to folder_path(folder.id), method: :delete, data: { confirm: '本当に削除していいですか？' } do %>
+                  <i class="far fa-trash-alt fa-lg"></i>
+                <% end %>
+              </div>
+              <br>
+            </div>
+          </div>
+          
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class = "back-button">
+      <%= link_to 'Back', creator_path(params[:creator_id]) %>
+    </div>
+
+  </div>
+</div>

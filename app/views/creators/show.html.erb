@@ -25,11 +25,18 @@
         <p>
           <%# @creator は @creator.id のこと%>
           <%# creator_artworks_path(@creator) によって creator の id 付きで artworks#index が呼ばれる %>
-          <span><%= link_to creator_artworks_path(@creator) do %></span>
+          <span><%= link_to artworks_path(creator_id: @creator.id) do %></span>
             <i class="far fa-images fa-lg"></i>
             <span>自分の作品を見る</span>
           <% end %>
         </p>
+          <span><%= link_to folders_path(creator_id: @creator.id) do %></span>
+            <i class="far fa-folder-open fa-lg"></i>
+            <span>フォルダ一覧</span>
+          <% end %>
+        <p>
+        </p>
+
         <br>
         <p>
           <span><%= link_to creator_path(@creator.id), method: :delete, data: { confirm: '本当に削除していいですか？' } do %></span>
@@ -39,10 +46,5 @@
         </p>
       </div>
     </div>
-
-
-    
-    
-    
   </div>
 </div>

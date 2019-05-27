@@ -1,0 +1,45 @@
+<h2>folder編集</h2>
+
+<div class = "edit-folder">
+  <div class="container">
+
+    <div class = "folder-form">
+      <div class="form-horizontal" role="form">
+
+        <%= form_with(model: @folder, local: true) do |form| %>
+          <% if @folder.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= @folder.errors.count %> 件のエラーがあります。</h2>
+
+              <ul>
+              <% @folder.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class = "form-group" >
+            <div class = "col-sm-offset-4 col-sm-4">
+              <%= form.label :folder_name, "フォルダ名", class: "control-label folder-name" %>
+              <%= form.text_field :folder_name, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class = "col-sm-offset-4 col-sm-4">
+              <%= form.submit :class => "btn btn-default submit-button" %>
+            </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class = "back-button">
+      <%= link_to 'Back', folders_path(creator_id: @folder.creator_id) %>
+    </div>
+
+  </div> 
+</div>

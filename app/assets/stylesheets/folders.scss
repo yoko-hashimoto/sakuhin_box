@@ -1,3 +1,63 @@
 // Place all the styles related to the folders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.folder-index {
+  text-align: left;
+  color: #000;
+
+  .folder-name {
+    font-size: 2.0rem;
+  }
+
+  h3 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+
+  .buttons, .folder-name {
+    display: inline-block;
+  }
+
+  .edit_button, .delete_button {
+    display: inline-block;
+    padding: 5px;
+    a {
+      color: #000;
+    }
+  }
+
+  .back-button {
+    text-align: center;
+    font-size: 2rem;
+    margin: 40px;
+  }
+  a {
+    color: #000;
+  }
+}
+
+.edit-folder {
+  .back-button{
+    text-align: center
+  }
+  a {
+    color: #000;
+    font-size: 2rem;
+  }
+  .folder-form {
+    margin: 40px;
+  }
+  .folder-name {
+    margin-bottom: 10px;
+  }
+}
+
+.creator-artworks-index, .folder-artworks-index {
+  .folder-setting {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+}
+

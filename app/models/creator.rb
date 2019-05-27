@@ -5,7 +5,7 @@ class Creator < ApplicationRecord
   
   # クリエイターは複数の作品を保有している
   has_many :artworks, dependent: :destroy
-  has_many :folders, ->{ order(:id) }
+  has_many :folders, ->{ order(:id) }, dependent: :destroy
 
   validates :name, presence: true
 
