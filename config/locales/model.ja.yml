@@ -25,5 +25,7 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード(確認用)"
         remember_me: "ログインを記憶"
+      user/creators:
+        name: "クリエイター"
       folder:
         folder_name: "フォルダ名"
