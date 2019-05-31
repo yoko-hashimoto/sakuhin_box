@@ -1,7 +1,7 @@
 <div class = "folder-artworks-index">  
   <div class="container">
 
-    <h3><%= link_to ("#{@folder.creator.name} の作品"), creator_artworks_path(@folder.creator.id) %> </h3>
+    <h3 class = "page-title"><%= link_to ("#{@folder.creator.name} の作品"), creator_artworks_path(@folder.creator.id) %> </h3>
 
     <div class = "row">
       <div class="col-xs-12 col-sm-3 col-md-2">

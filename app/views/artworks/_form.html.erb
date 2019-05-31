@@ -4,8 +4,8 @@
     <%= form_with(model: artwork, local: true) do |form| %>
 
       <% if artwork.errors.any? %>
-        <div id="error_explanation" class="col-sm-offset-2 col-sm-10">
-          <h2><%= artwork.errors.count %>件のエラーがあります。</h2>
+        <div id="error_explanation" class="error-message col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+          <h3><%= artwork.errors.count %>件のエラーがあります。</h3>
           <ul>
           <% artwork.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
