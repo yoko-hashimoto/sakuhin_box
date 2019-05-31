@@ -18,7 +18,7 @@
         <div class="col-sm-8 col-sm-offset-2">
           <!-- 確認画面から新規作成画面に戻った時等に、アップロードした画像を表示させるための記述 -->
           <!-- img-responsive によって画像をレスポンシブに対応 -->
-          <p><%= image_tag(artwork.image.url, :class => "img-responsive center-block") if artwork.image && artwork.image.url %></p>
+          <!--<p><%= image_tag(artwork.image.url, :class => "img-responsive center-block") if artwork.image && artwork.image.url %></p>-->
           <%= form.hidden_field :image_cache %>
         </div>
 
@@ -48,7 +48,7 @@
       <div class="form-group">
         <%= form.label :created_date, '作った時期', class: "col-sm-offset-2 col-sm-2 control-label" %>
           <div class="col-sm-4">
-            <%= form.date_select :created_date, discard_day: true, use_month_numbers: true, start_year: Time.now.year - 10, end_year: Time.now.year, class: "form-control" %>
+            <%= form.date_select :created_date, {include_blank: true, discard_day: true, use_month_numbers: true, start_year: Time.now.year - 10, end_year: Time.now.year}, {class: "created_date form-control"} %>
           </div>
       </div>
 

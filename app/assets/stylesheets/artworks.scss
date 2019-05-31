@@ -172,14 +172,18 @@ body {
   textarea {
     resize: none;
   }
+  .created_date {
+    display: inline-block;
+    width: auto;
+  }
 }
 
 .new-artwork, .edit-artwork, .artwork-detail {
-    .page-title {
-        text-align: center;
-        font-weight: bold;
-        margin: 30px;
-    }
+  .page-title {
+      text-align: center;
+      font-weight: bold;
+      margin: 30px;
+  }
   .back-button{
     text-align: center; 
     margin: 50px;
