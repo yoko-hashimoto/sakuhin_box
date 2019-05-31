@@ -17,11 +17,6 @@ class FoldersController < ApplicationController
 
   def new
     @folder = Folder.new
-
-    respond_to do |format|
-      format.html { }
-      format.js { }
-    end
   end
 
   def edit
@@ -41,24 +36,6 @@ class FoldersController < ApplicationController
         format.js { @status = "fail" }
       end
     end
-
-    # @folder = Folder.new(folder_params)
-    # @folder.creator_id = params[:creator_id]
-    # if @folder.save
-    #   redirect_to new_artwork_path, notice: "フォルダを追加しました！"
-    # else
-    #   render 'new'
-    # end
-
-    # respond_to do |format|
-    #   if @folder.save
-    #     format.html { redirect_to new_artwork_path, notice: 'Folder was successfully created.' }
-    #     format.json { render :show, status: :created, location: @folder }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @folder.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def update
