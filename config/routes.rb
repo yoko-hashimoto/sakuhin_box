@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
-  # root 'artworks#index'
+
   root 'tops#index'
+
+  devise_for :users, controllers: {
+    # registrations_controller.rbで記述する内容を有効にする
+    registrations: 'users/registrations'
+  }
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :tops, only: [:index]
 
