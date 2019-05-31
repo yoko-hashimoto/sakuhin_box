@@ -7,7 +7,7 @@ class Creator < ApplicationRecord
   has_many :artworks, dependent: :destroy
   has_many :folders, ->{ order(:id) }, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 50 }
 
   mount_uploader :icon, IconUploader
 end

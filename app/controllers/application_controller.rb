@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
+	protect_from_forgery with: :exception
 	# deviseコントローラーにストロングパラメータを追加する
 	before_action :configure_permitted_parameters, if: :devise_controller?
+
+	# ログイン後の遷移を、作品一覧画面に設定
+	def after_sign_in_path_for(resource)
+		artworks_path
+	end
 
 	protected
 

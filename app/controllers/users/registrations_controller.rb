@@ -25,6 +25,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  protected
+
+    # アカウント編集後、作品一覧画面に遷移する
+    def after_update_path_for(resource)
+      artworks_path
+    end
+
   # GET /resource/sign_up
   # def new
   #   super

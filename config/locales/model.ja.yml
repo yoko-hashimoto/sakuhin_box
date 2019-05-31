@@ -4,6 +4,7 @@ ja:
       artwork: "作品"
       user: "ユーザー"
       creator: "クリエイター"
+      folder: "フォルダ"
 
     attributes:
       artwork:
@@ -13,14 +14,18 @@ ja:
         is_published: "公開設定"
         creator: "クリエイター"
       creator:
-        name: "名前"
+        name: "クリエイター"
         icon: "アイコン"
       user:
         title: "タイトル"
-        name: "名前"
+        username: "ユーザーネーム"
         email: "メールアドレス"
         content: "内容"
         current_password: "現在のパスワード"
         password: "パスワード"
-        password_confirmation: "確認用パスワード"
+        password_confirmation: "パスワード(確認用)"
         remember_me: "ログインを記憶"
+      user/creators:
+        name: "クリエイター"
+      folder:
+        folder_name: "フォルダ名"

@@ -1,5 +1,7 @@
-<p>Welcome <%= @email %>!</p>
+<p><%= @email %>様、この度は「さくひんBOX」にご登録頂きありがとうございます。</P>
 
-<p>You can confirm your account email through the link below:</p>
+<p>アカウントの登録を完了させるには、以下のリンクをクリックしてください。</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to 'アカウントを有効にする', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>このメールにお心当たりのない場合は、お手数ですがメールを破棄していただきますようお願い申し上げます。<p>

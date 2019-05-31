@@ -9,5 +9,6 @@ class User < ApplicationRecord
   #親子関係にある関連モデルcreators（子）を作成する。
   accepts_nested_attributes_for :creators
 
-  validates :username, presence: true
+  validates :username, presence: true, length: { maximum: 50 }
+
 end

@@ -26,10 +26,10 @@ body {
 }
 
 .artworks-index,.creator-artworks-index, .folder-artworks-index, .artwork-form {
-  h3 {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 40px;
+  .page-title {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 40px;
   }
 
   .image {
@@ -169,19 +169,20 @@ body {
 }
 
 .artwork-form {
-  ul {
-  list-style: none;
-  }
   textarea {
     resize: none;
+  }
+  .created_date {
+    display: inline-block;
+    width: auto;
   }
 }
 
 .new-artwork, .edit-artwork, .artwork-detail {
-  h3 {
-    text-align: center;
-    font-weight: bold;
-    margin: 30px;
+  .page-title {
+      text-align: center;
+      font-weight: bold;
+      margin: 30px;
   }
   .back-button{
     text-align: center; 

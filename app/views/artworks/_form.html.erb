@@ -4,8 +4,8 @@
     <%= form_with(model: artwork, local: true) do |form| %>
 
       <% if artwork.errors.any? %>
-        <div id="error_explanation" class="col-sm-offset-2 col-sm-10">
-          <h2><%= artwork.errors.count %>件のエラーがあります。</h2>
+        <div id="error_explanation" class="error-message col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+          <h3><%= artwork.errors.count %>件のエラーがあります。</h3>
           <ul>
           <% artwork.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
@@ -18,7 +18,7 @@
         <div class="col-sm-8 col-sm-offset-2">
           <!-- 確認画面から新規作成画面に戻った時等に、アップロードした画像を表示させるための記述 -->
           <!-- img-responsive によって画像をレスポンシブに対応 -->
-          <p><%= image_tag(artwork.image.url, :class => "img-responsive center-block") if artwork.image && artwork.image.url %></p>
+          <!--<p><%= image_tag(artwork.image.url, :class => "img-responsive center-block") if artwork.image && artwork.image.url %></p>-->
           <%= form.hidden_field :image_cache %>
         </div>
 
@@ -48,7 +48,7 @@
       <div class="form-group">
         <%= form.label :created_date, '作った時期', class: "col-sm-offset-2 col-sm-2 control-label" %>
           <div class="col-sm-4">
-            <%= form.date_select :created_date, discard_day: true, use_month_numbers: true, start_year: Time.now.year - 10, end_year: Time.now.year, class: "form-control" %>
+            <%= form.date_select :created_date, {include_blank: true, discard_day: true, use_month_numbers: true, start_year: Time.now.year - 10, end_year: Time.now.year}, {class: "created_date form-control"} %>
           </div>
       </div>
 
@@ -61,7 +61,7 @@
           </div>
           <div class="radio-inline">
             <%# :checked => true によってデフォルトでチェックを付けた状態にする %>
-            <label><%= form.radio_button :is_published, false, :checked => true %>公開しない</label>
+            <label><%= form.radio_button :is_published, false %>公開しない</label>
           </div>
         </div>
       </div>
