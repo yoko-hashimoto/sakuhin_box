@@ -13,28 +13,16 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-
-            <!-- フォルダ名を一つずつ表示-->
-            <% @folders.each do |folder| %>
-              <!-- folder_artworks_path(folder.id) によって folder の id 付きで artworks#index が呼ばれる -->
-              <%#= link_to artworks_path(folder_id: folder.id) do %>
-              <%= link_to artworks_path(folder_id: folder.id) do %>
-                <p class = "folder-name"><i class="far fa-folder"></i> <%= folder.folder_name %></p>
-              <% end%>
-            <% end%>
+              <!-- フォルダ名を一つずつ表示する view を 部分テンプレートで表示 -->
+              <%= render "folder_list", folders: @folders %>
             </ul>
           </div>
         </div>
 
         <div class = "folder-list">
           <h4><span class ="folder-top"><i class="far fa-folder-open"></i> フォルダ</span></h4>
-
-            <!-- フォルダ名を一つずつ表示-->
-            <% @folders.each do |folder| %>
-              <%= link_to artworks_path(folder_id: folder.id) do %>
-                <p class = "folder-name"><i class="far fa-folder"></i> <%= folder.folder_name %></p>
-              <% end %>
-            <% end %>
+          <!-- フォルダ名を一つずつ表示する view を 部分テンプレートで表示 -->
+          <%= render "folder_list", folders: @folders %>
         </div>
 
         <div class = "folder-setting">
