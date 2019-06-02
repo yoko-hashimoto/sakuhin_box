@@ -6,8 +6,8 @@ class FoldersController < ApplicationController
   def index
     respond_to do |format|
       @folders = params[:creator_id].present? ? Folder.where(creator_id: params[:creator_id]) : []
-      @creator = Folder.where(creator_id: params[:creator_id])
-      
+      @creator = Creator.find(params[:creator_id])
+
       format.html { render :index }
 
       creator = Creator.find(params[:creator_id]) if params[:creator_id].present?
