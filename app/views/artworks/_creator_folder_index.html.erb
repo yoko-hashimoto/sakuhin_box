@@ -1,0 +1,61 @@
+<div class = "row">
+  <div class="col-xs-12 col-sm-3 col-md-2">
+    
+    <div class = "folder-dropdown">
+      <div class="dropdown">
+        <a href="#" class="btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">
+          フォルダを選択
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <!-- フォルダ名を一つずつ表示する view を 部分テンプレートで表示 -->
+          <%= render "folder_list", folders: @folders %>
+        </ul>
+      </div>
+    </div>
+
+    <div class = "folder-list">
+      <h4><span class ="folder-top"><i class="far fa-folder-open"></i> フォルダ</span></h4>
+      <!-- フォルダ名を一つずつ表示する view を 部分テンプレートで表示 -->
+      <%= render "folder_list", folders: @folders %>
+    </div>
+
+    <div class = "folder-setting">
+      <%= link_to folders_path(creator_id: @creator.id) do %>
+        <p><i class="fas fa-cog"></i> フォルダ編集</p>
+      <% end%>
+    </div>
+    
+    </div>
+    
+    <div class="col-xs-12 col-sm-6 col-md-10">
+      <div class = "row">
+        <% @artworks.each do |artwork| %>
+          <div class = "col-xs-12 col-md-6">
+            <div class = "thumbnail">
+              <div class = "artwork">
+                <%= link_to artwork do%>
+                  <p class = "image">
+                    <%= image_tag artwork.image.url %>
+                  </p>
+                  <p class = "creator-name">
+                    <%= artwork.creator.name %>
+                  </p>
+                  <p class="date">
+                    <%= artwork.created_at.strftime("%Y-%m-%d %H:%M ") %>
+                  </p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class = "pagination-wrapper">
+  <%= paginate @artworks %>
+</div>
+
