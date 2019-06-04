@@ -12,6 +12,19 @@ class ImageUploader < CarrierWave::Uploader::Base
   # 画像サイズの調整
   process :resize_to_limit => [700, 700]
 
+
+  # Exif情報のOrientationから画像をよしなに修正した後、Exif情報を除去する
+  process :fix_exif_rotation_and_strip_exif
+
+  def fix_exif_rotation_and_strip_exif
+    manipulate! do |img|
+      img.auto_orient # よしなに！
+      img.strip       # Exif情報除去
+      img = yield(img) if block_given?
+      img
+    end
+  end
+
   # 画像ファイルの保存先の設定
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
