@@ -2,7 +2,7 @@ class ArtworksController < ApplicationController
   # 下記のアクションは、ログイン中のみ許可する
   before_action :authenticate_user!, only: [:new, :show, :edit, :update, :destroy]
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
-  before_action :user_check, only: [:new, :edit, :update, :destroy]
+  before_action :user_check, only: [:edit, :update, :destroy]
 
   def index
     # パラメーターに creator_id が含まれる（クリエイターの詳細画面から遷移する）場合
