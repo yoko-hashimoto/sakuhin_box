@@ -19,7 +19,11 @@
               <!-- .strftime("%Y-%m") によって年と月のみの表示にする-->
               <span>作った時期 < <%= @artwork.created_date.strftime("%Y-%m") %>></span>
             </p>
-            
+
+            <p class = "is-published">
+              <span>公開設定 < <%= @artwork.is_published ? 'ON' : 'OFF' %> ></span>
+            </p>
+
             <p class = "date">
               <%= @artwork.created_at.strftime("%Y-%m-%d %H:%M ") %>
             </p>
