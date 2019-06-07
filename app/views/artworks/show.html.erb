@@ -54,9 +54,14 @@
     </div>
 
     <div class = "back-button">
-      <%= link_to 'みんなの作品', artworks_path %>
-      <span class = "partition"> | </span>
-      <%= link_to '自分の作品', creator_artworks_path(@creator.id) %>
+      <!-- artwork を投稿した user のidと current_user (ログイン中のuserのid)が同じ場合 -->
+      <% if @artwork.creator.user_id == current_user.id %>
+        <%= link_to 'みんなの作品', artworks_path %>
+        <span class = "partition"> | </span>
+        <%= link_to '自分の作品', creator_artworks_path(@creator.id) %>
+      <% else %>
+        <%= link_to 'Back', artworks_path %>
+      <% end %>
     </div>
 
   </div>
