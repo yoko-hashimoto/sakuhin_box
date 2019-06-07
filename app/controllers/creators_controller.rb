@@ -2,7 +2,7 @@ class CreatorsController < ApplicationController
   # 下記のアクションは、ログイン中のみ許可する
   before_action :authenticate_user!
   before_action :set_creator, only:[:show, :edit, :update, :destroy]
-  before_action :user_check, only: [:create, :edit, :update, :destroy]
+  before_action :user_check, only: [:create, :show, :edit, :update, :destroy]
 
   def index
   end
@@ -53,9 +53,9 @@ class CreatorsController < ApplicationController
   end
 
   def user_check
-    # current_user と作品に紐付く user が相違している場合は作品一覧画面に遷移し、エラーメッセージを表示する
+    # current_user とcreator に紐付く user が相違している場合は作品一覧画面に遷移し、エラーメッセージを表示する
     unless current_user.id == Creator.find(params[:id]).user_id
-      redirect_to artworks_path, notice: "権限がありません"
+      redirect_to artworks_path, notice: "権限がありません。"
     end
   end
 end
