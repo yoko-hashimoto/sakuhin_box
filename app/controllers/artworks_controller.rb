@@ -66,19 +66,20 @@ class ArtworksController < ApplicationController
       @artwork.folder_id = params[:artwork][:folder_id]
     end
 
-    if @artwork.save
+    Artwork.transaction do
+      @artwork.save!
       # new_folder_name に値がある場合(フォルダの新規登録欄にフォルダ名を入力した場合)
       if new_folder_name.present?
         creator = Creator.find(params[:artwork][:creator_id])
         #folder を作成する
-        folder = Folder.create(creator_id: creator.id, folder_name: new_folder_name)
-        @artwork.update(folder_id: folder.id)
+        @folder = Folder.new(creator_id: creator.id, folder_name: new_folder_name)
+        @folder.save!
+        @artwork.update!(folder_id: @folder.id)
       end
-      
-      redirect_to creator_artworks_path(@artwork.creator_id),notice: "作品を投稿しました！"
-    else
-      render 'new'
     end
+      redirect_to creator_artworks_path(@artwork.creator_id), notice: "作品を投稿しました！"
+    rescue => e
+      render 'new'
 
       # respond_to do |format|
       #   if @artwork.save
