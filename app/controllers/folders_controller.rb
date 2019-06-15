@@ -2,7 +2,7 @@ class FoldersController < ApplicationController
   # 下記のアクションは、ログイン中のみ許可する
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_folder, only: [:edit, :update, :destroy]
-  before_action :user_check, only: [:index, :create, :show, :edit, :update, :destroy]
+  before_action :user_check, only: [:index, :create, :show, :edit, :update]
 
   def index
     respond_to do |format|
