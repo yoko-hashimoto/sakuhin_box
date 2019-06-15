@@ -3,10 +3,12 @@ class ArtworksController < ApplicationController
   before_action :authenticate_user!, only: [:new, :show, :edit, :update, :destroy]
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
+  # current_user が存在する場合(ログインしている場合)のみ実行する
+  before_action :ridirect_to_artworks_top_unless_own_creator_or_folder, only: [:index], if: -> {current_user.present?}
 
   def index
-    # パラメーターに creator_id が含まれる（クリエイターの詳細画面から遷移する）場合
-    if params[:creator_id]
+    # ログイン中かつパラメーターに creator_id が含まれる（クリエイターの詳細画面から遷移する）場合
+    if current_user && params[:creator_id]
       # そのクリエイターに紐付く作品のみ、全て取得する
       #（以下の場合、パラメーターに含まれる creator_id と artworksテーブルの creator_id カラムが一致する物を取り出す ）
       @artworks = Artwork.where(creator_id: params[:creator_id])
@@ -19,8 +21,8 @@ class ArtworksController < ApplicationController
       # クリエイターに紐付く作品一覧画面を template_name に代入する
       template_name = :creator_index
 
-    # パラメーターに folder_id が含まれる（フォルダに紐付いた作品のみ表示させる）場合
-    elsif params[:folder_id]
+    # ログイン中かつパラメーターに folder_id が含まれる（フォルダに紐付いた作品のみ表示させる）場合
+    elsif current_user && params[:folder_id]
       @folder = Folder.find(params[:folder_id])
       # そのフォルダに紐付く作品のみ、全て取得する
       #（以下の場合、パラメーターに含まれる folder_id と artworksテーブルの folder_id カラムが一致する物を取り出す ）
@@ -141,6 +143,16 @@ class ArtworksController < ApplicationController
     # current_user と作品に紐付く user が相違している場合は作品一覧画面に遷移し、エラーメッセージを表示する
     unless current_user.id == Artwork.find(params[:id]).creator.user_id
       redirect_to artworks_path, notice: "権限がありません"
+    end
+  end
+
+  def ridirect_to_artworks_top_unless_own_creator_or_folder
+    # パラメーターに creator_id が含まれる場合
+    if params[:creator_id].present?
+      # クリエイターの中から idとパラメーターに含まれる creator_id が一致するもので、user_id と current_user.id が一致するものが存在しなければ
+      unless Creator.exists?(id: params[:creator_id], user_id: current_user.id)
+        redirect_to artworks_path
+      end
     end
   end
 
