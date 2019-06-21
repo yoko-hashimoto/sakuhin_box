@@ -3,10 +3,10 @@
   <div class="form-horizontal" role="form">
     <%= form_with(model: artwork, local: true) do |form| %>
 
-      <% if artwork.errors.any? || (@folder.present? && @folder.errors.any?) %>
+      <% if artwork.errors.any? || (folder.present? && folder.errors.any?) %>
         <div id="error_explanation" class="error-message col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-          <% if @folder.present? %>
-            <h3><%= artwork.errors.count + @folder.errors.count %>件のエラーがあります。</h3>
+          <% if folder.present? %>
+            <h3><%= artwork.errors.count + folder.errors.count %>件のエラーがあります。</h3>
           <% else %>
             <h3><%= artwork.errors.count%>件のエラーがあります。</h3>
           <% end %>
@@ -14,8 +14,8 @@
           <% artwork.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
-          <% if @folder.present? %>
-            <% @folder.errors.full_messages.each do |msg|%>
+          <% if folder.present? %>
+            <% folder.errors.full_messages.each do |msg|%>
               <li><%= msg %></li>
             <% end %>
           <% end %>

@@ -14,7 +14,9 @@ class Folder < ApplicationRecord
   # folder_name に対するバリデーションをメソッドとして独自に作成
   def folder_name_valid
     # この creator は belongs_to :creator で紐付けている creator の事。最後の folder_name はフォームで入力された folder_name の事。
+    # (自分自身 (folder) が属している creator が保有している folder の中に、フォームで入力した folder_name と同じものがある場合)
     if creator.folders.where(folder_name: folder_name).any?
+      # エラーメッセージを追加する
       errors.add(:folder_name, "はすでに存在します。")
     end
   end

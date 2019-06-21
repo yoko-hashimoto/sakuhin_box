@@ -3,7 +3,7 @@
 
     <h3 class = "page-title"><i class="far fa-edit"></i> 編集する</h3>
 
-    <%= render 'form', artwork: @artwork %>
+    <%= render 'form', artwork: @artwork, folder: @folder %>
 
     <div class = "back-button">
       <%= link_to 'Back', artwork_path(@artwork.id) %>

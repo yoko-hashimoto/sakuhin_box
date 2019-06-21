@@ -66,7 +66,9 @@ class ArtworksController < ApplicationController
       @artwork.folder_id = params[:artwork][:folder_id]
     end
 
+    # トランザクションの設定(folder の作成に失敗した場合、artwork の処理もエラーにする為必要)
     Artwork.transaction do
+      # 行いたい処理
       @artwork.save!
       # new_folder_name に値がある場合(フォルダの新規登録欄にフォルダ名を入力した場合)
       if new_folder_name.present?
@@ -77,20 +79,11 @@ class ArtworksController < ApplicationController
         @artwork.update!(folder_id: @folder.id)
       end
     end
+      # 上記の処理が全て成功した場合
       redirect_to creator_artworks_path(@artwork.creator_id), notice: "作品を投稿しました！"
+    # 上記の処理が一つでも失敗した場合
     rescue => e
       render 'new'
-
-      # respond_to do |format|
-      #   if @artwork.save
-      #     format.html { redirect_to artworks_path, notice: '作品を投稿しました！' }
-      #     format.json { render :show, status: :created, location: @artwork }
-      #   else
-      #     format.html { render :new }
-      #     format.json { render json: @artwork.errors, status: :unprocessable_entity }
-      #   end
-      # end
-
   end
 
   def edit
@@ -108,20 +101,24 @@ class ArtworksController < ApplicationController
       @artwork.folder_id = params[:artwork][:folder_id]
     end
 
-    if @artwork.update(artwork_params)
-      # new_folder_name に値がある場合(フォルダの新規登録欄にフォルダ名を入力した場合)
-      if new_folder_name.present?
-        creator = Creator.find(params[:artwork][:creator_id])
-        #folder を作成する
-        folder = Folder.create(creator_id: creator.id, folder_name: new_folder_name)
-        @artwork.update(folder_id: folder.id)
-      end
-
-      redirect_to creator_artworks_path(@artwork.creator_id),notice: "作品を編集しました！"
-    else
-      render "edit"
+    # トランザクションの設定 (folder の作成に失敗した場合、artwork の処理もエラーにする為必要)
+    Artwork.transaction do
+      # 行いたい処理
+      @artwork.update!(artwork_params)
+        # new_folder_name に値がある場合(フォルダの新規登録欄にフォルダ名を入力した場合)
+        if new_folder_name.present?
+          creator = Creator.find(params[:artwork][:creator_id])
+          #folder を作成する
+          @folder = Folder.new(creator_id: creator.id, folder_name: new_folder_name)
+          @folder.save!
+          @artwork.update!(folder_id: @folder.id)
+        end
     end
-
+      # 上記の処理が全て成功した場合
+      redirect_to creator_artworks_path(@artwork.creator_id),notice: "作品を編集しました！"
+    # 上記の処理が一つでも失敗した場合
+    rescue => e
+      render "edit"
   end
 
   def destroy
