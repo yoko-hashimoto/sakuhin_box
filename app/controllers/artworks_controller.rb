@@ -3,8 +3,9 @@ class ArtworksController < ApplicationController
   before_action :authenticate_user!, only: [:new, :show, :edit, :update, :destroy]
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
-  # current_user が存在する場合(ログインしている場合)のみ実行する
-  before_action :ridirect_to_artworks_top_unless_own_creator_or_folder, only: [:index], if: -> {current_user.present?}
+  # if: -> {current_user.present?} によって current_user が存在する場合(ログインしている場合)のみ実行する
+  before_action :ridirect_to_artworks_top_unless_own_creator, only: [:index], if: -> {current_user.present?}
+  before_action :ridirect_to_artworks_top_unless_own_folder, only: [:index], if: -> {current_user.present?}
 
   def index
     # ログイン中かつパラメーターに creator_id が含まれる（クリエイターの詳細画面から遷移する）場合
@@ -144,11 +145,22 @@ class ArtworksController < ApplicationController
     end
   end
 
-  def ridirect_to_artworks_top_unless_own_creator_or_folder
+  def ridirect_to_artworks_top_unless_own_creator
     # パラメーターに creator_id が含まれる場合
     if params[:creator_id].present?
       # クリエイターの中から idとパラメーターに含まれる creator_id が一致するもので、user_id と current_user.id が一致するものが存在しなければ
       unless Creator.exists?(id: params[:creator_id], user_id: current_user.id)
+        redirect_to artworks_path
+      end
+    end
+  end
+
+  def ridirect_to_artworks_top_unless_own_folder
+    # パラメーターに folder_id が含まれる場合
+    if params[:folder_id].present?
+      # パラメーターに含まれる folder_id に紐付いている、creator が持つ user_id と current_user.id が一致するものが存在しなければ
+      folder = Folder.find(params[:folder_id])
+      unless folder.creator.user_id == current_user.id
         redirect_to artworks_path
       end
     end
