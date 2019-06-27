@@ -6,6 +6,8 @@ class User < ApplicationRecord
   
   # 1人のユーザーは複数のクリエイターを保有している
   has_many :creators, dependent: :destroy
+  has_many :artworks, through: :creators
+  has_many :folders, through: :creators
   #親子関係にある関連モデルcreators（子）を作成する。
   accepts_nested_attributes_for :creators
 

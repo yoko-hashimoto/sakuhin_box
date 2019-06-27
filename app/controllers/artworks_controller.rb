@@ -11,33 +11,33 @@ class ArtworksController < ApplicationController
     # ログイン中かつパラメーターに creator_id が含まれる（クリエイターの詳細画面から遷移する）場合
     if current_user && params[:creator_id]
       # そのクリエイターに紐付く作品のみ、全て取得する
-      #（以下の場合、パラメーターに含まれる creator_id と artworksテーブルの creator_id カラムが一致する物を取り出す ）
-      @artworks = Artwork.where(creator_id: params[:creator_id])
+      #（以下の場合、パラメーターに含まれる creator_id と current_user に紐付く artworksの中から creator_id カラムが一致する物を取り出す ）
+      @artworks = current_user.artworks.where(creator_id: params[:creator_id])
       
-      #（以下の場合、パラメーターに含まれる creator_id と foldersテーブルの creator_id カラムが一致する物を取り出す ）
-      @folders = Folder.where(creator_id: params[:creator_id]).order(updated_at: "DESC")
+      #（以下の場合、パラメーターに含まれる creator_id と current_user に紐付 foldersの中から creator_id カラムが一致する物を取り出す ）
+      @folders = current_user.folders.where(creator_id: params[:creator_id]).order(updated_at: "DESC")
 
-      @creator = Creator.find_by(id: params[:creator_id])
+      @creator = current_user.creators.find_by(id: params[:creator_id])
 
       # クリエイターに紐付く作品一覧画面を template_name に代入する
       template_name = :creator_index
 
     # ログイン中かつパラメーターに folder_id が含まれる（フォルダに紐付いた作品のみ表示させる）場合
     elsif current_user && params[:folder_id]
-      @folder = Folder.find(params[:folder_id])
+      @folder = current_user.folders.find(params[:folder_id])
       # そのフォルダに紐付く作品のみ、全て取得する
       #（以下の場合、パラメーターに含まれる folder_id と artworksテーブルの folder_id カラムが一致する物を取り出す ）
-      @artworks = Artwork.where(folder_id: params[:folder_id])
+      @artworks = current_user.artworks.where(folder_id: params[:folder_id])
       #（以下の場合、パラメーターに含まれる creator_id と foldersテーブルの creator_id カラムが一致する物を取り出す ）
-      @folders = Folder.where(creator_id: @folder.creator).order(updated_at: "DESC")
+      @folders = current_user.folders.where(creator_id: @folder.creator).order(updated_at: "DESC")
 
-      @creator = Creator.find_by(id: @folder.creator_id)
+      @creator = current_user.creators.find_by(id: @folder.creator_id)
       # フォルダに紐付く作品一覧画面を template_name に代入する
       template_name = :folder_index
 
     else
-      # Artwork.published で artworkモデルで定義したスコープ published を呼びだす
-      @artworks = Artwork.published
+      # current_user.artworks.published で artworkモデルで定義したスコープ published を呼びだす
+      @artworks = current_user.artworks.published
       # 作品一覧画面を template_name に代入する
       template_name = :index
     end
@@ -73,7 +73,7 @@ class ArtworksController < ApplicationController
       @artwork.save!
       # new_folder_name に値がある場合(フォルダの新規登録欄にフォルダ名を入力した場合)
       if new_folder_name.present?
-        creator = Creator.find(params[:artwork][:creator_id])
+        creator = current_user.creators.find(params[:artwork][:creator_id])
         #folder を作成する
         @folder = Folder.new(creator_id: creator.id, folder_name: new_folder_name)
         @folder.save!
@@ -91,7 +91,7 @@ class ArtworksController < ApplicationController
   end
   
   def show
-    @creator = Creator.find(@artwork.creator_id)
+    @creator = current_user.creators.find(@artwork.creator_id)
   end
 
   def update
@@ -108,9 +108,9 @@ class ArtworksController < ApplicationController
       @artwork.update!(artwork_params)
         # new_folder_name に値がある場合(フォルダの新規登録欄にフォルダ名を入力した場合)
         if new_folder_name.present?
-          creator = Creator.find(params[:artwork][:creator_id])
+          creator = current_user.creators.find(params[:artwork][:creator_id])
           #folder を作成する
-          @folder = Folder.new(creator_id: creator.id, folder_name: new_folder_name)
+          @folder = current_user.folders.new(creator_id: creator.id, folder_name: new_folder_name)
           @folder.save!
           @artwork.update!(folder_id: @folder.id)
         end
