@@ -2,7 +2,7 @@ class FoldersController < ApplicationController
   # 下記のアクションは、ログイン中のみ許可する
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_folder, only: [:edit, :update, :destroy]
-  before_action :user_check, only: [:index, :create, :show, :edit, :update]
+  before_action :user_check, only: [:index, :edit, :update, :destroy]
 
   def index
     respond_to do |format|
@@ -71,9 +71,13 @@ class FoldersController < ApplicationController
   end
 
   def user_check
-    # current_user とfolder に紐付く user が相違している場合は作品一覧画面に遷移し、エラーメッセージを表示する
-    unless current_user.id == Creator.find(params[:creator_id]).user_id
+    # パラメーターに creator の id が含まれる(edit, update, destroyアクションの)場合は、Creator モデルから creator を取得、
+    # creator の id が含まれない（index アクション）の場合は、パラメーターの Folder の id から creator を取得
+    creator = params[:creator_id].present? ? Creator.find(params[:creator_id]) : Folder.find(params[:id]).creator
+    # current_user の id とfolder に紐付く creator の user_id  が相違している場合は作品一覧画面に遷移し、エラーメッセージを表示する
+    unless current_user.id == creator.user_id
       redirect_to artworks_path, notice: "権限がありません。"
     end
   end
+
 end
