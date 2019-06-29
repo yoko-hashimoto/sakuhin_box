@@ -16,27 +16,7 @@ class FoldersController < ApplicationController
     end
   end
 
-  def new
-    @folder = Folder.new
-  end
-
   def edit
-  end
-
-  def create
-    @folder = Folder.new(folder_params)
-    
-    respond_to do |format|
-      if @folder.save
-        format.html { redirect_to @folder, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @folder }
-        format.js { @status = "success"}
-      else
-        format.html { render :new }
-        format.json { render json: @folder.errors, status: :unprocessable_entity }
-        format.js { @status = "fail" }
-      end
-    end
   end
 
   def update
