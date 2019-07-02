@@ -6,12 +6,12 @@ class FoldersController < ApplicationController
 
   def index
     respond_to do |format|
-      @folders = params[:creator_id].present? ? Folder.where(creator_id: params[:creator_id]) : []
-      @creator = Creator.find(params[:creator_id])
+      @folders = params[:creator_id].present? ? current_user.folders.where(creator_id: params[:creator_id]) : []
+      @creator = current_user.creators.find(params[:creator_id])
 
       format.html { render :index }
 
-      creator = Creator.find(params[:creator_id]) if params[:creator_id].present?
+      creator = current_user.creators.find(params[:creator_id]) if params[:creator_id].present?
       format.js { render json: creator.folders.select(:id, :folder_name) }
     end
   end
@@ -30,7 +30,7 @@ class FoldersController < ApplicationController
 
   def destroy
     # artworkに紐付くfolder_idを全てnillにする
-    artworks = Artwork.where(folder_id: @folder.id)
+    artworks = current_user.artworks.where(folder_id: @folder.id)
     artworks.update(folder_id: [])
     
     @creator = Folder.find(@folder.creator_id)
