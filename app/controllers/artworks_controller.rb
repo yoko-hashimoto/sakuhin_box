@@ -2,7 +2,7 @@ class ArtworksController < ApplicationController
   # 下記のアクションは、ログイン中のみ許可する
   before_action :authenticate_user!, only: [:new, :show, :edit, :update, :destroy]
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
-  before_action :user_check, only: [:edit, :update, :destroy]
+  before_action :user_check, only: [:create, :edit, :show, :update, :destroy]
   # if: -> {current_user.present?} によって current_user が存在する場合(ログインしている場合)のみ実行する
   before_action :ridirect_to_artworks_top_unless_own_creator, only: [:index], if: -> {current_user.present?}
   before_action :ridirect_to_artworks_top_unless_own_folder, only: [:index], if: -> {current_user.present?}
@@ -140,7 +140,8 @@ class ArtworksController < ApplicationController
 
   def user_check
     # current_user と作品に紐付く user が相違している場合は作品一覧画面に遷移し、エラーメッセージを表示する
-    unless current_user.id == Artwork.find(params[:id]).creator.user_id
+    creator = params[:id].present? ? Artwork.find(params[:id]).creator : Creator.find(params[:artwork][:creator_id])
+    unless current_user.id == creator.user_id
       redirect_to artworks_path, notice: "権限がありません"
     end
   end
