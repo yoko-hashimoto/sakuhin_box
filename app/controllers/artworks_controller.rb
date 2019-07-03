@@ -37,7 +37,7 @@ class ArtworksController < ApplicationController
 
     else
       # current_user.artworks.published で artworkモデルで定義したスコープ published を呼びだす
-      @artworks = current_user.artworks.published
+      @artworks = Artwork.published
       # 作品一覧画面を template_name に代入する
       template_name = :index
     end
