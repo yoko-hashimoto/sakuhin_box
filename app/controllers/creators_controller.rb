@@ -2,7 +2,7 @@ class CreatorsController < ApplicationController
   # 下記のアクションは、ログイン中のみ許可する
   before_action :authenticate_user!
   before_action :set_creator, only:[:show, :edit, :update, :destroy]
-  before_action :user_check, only: [:create, :show, :edit, :update, :destroy]
+  before_action :user_check, only: [:show, :edit, :update, :destroy]
 
   def index
   end
